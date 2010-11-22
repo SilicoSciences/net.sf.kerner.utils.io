@@ -107,7 +107,7 @@ public class TestLazyStringReader {
 	 * Test method for {@link net.sf.kerner.commons.io.lazy.LazyStringReader#read(java.io.InputStream)}.
 	 * @throws IOException 
 	 */
-	@Test(expected=IOException.class)
+	@Test(expected=NullPointerException.class)
 	public final void testReadInputStream01() throws IOException {
 		new LazyStringReader().read((InputStream)null);
 	}
