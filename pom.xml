@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.kerner-utils</groupId>
 	<artifactId>io</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Kerner-Utils-IO</name>
 	<description>Commonly used utility classes (IO related).</description>
 	<url>http://kerner-utils-io.sourceforge.net/</url>
@@ -156,7 +157,7 @@
 							</formats>
 							<check>
 								<lineRate>70</lineRate>
-								<haltOnFailure>false</haltOnFailure>
+								<haltOnFailure>true</haltOnFailure>
 								<totalLineRate>70</totalLineRate>
 								<packageLineRate>70</packageLineRate>
 							</check>
