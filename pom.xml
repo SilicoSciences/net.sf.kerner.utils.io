@@ -164,9 +164,11 @@
 							<instrumentation>
 								<ignores>
 									<ignore>*Exception.class</ignore>
+									<ignore>net.sf.kerner.utils.io.stolen.*</ignore>
 								</ignores>
 								<excludes>
 									<exclude>*Exception.class</exclude>
+									<exclude>net/sf/kerner/utils/io/stolen/*.class</exclude>
 								</excludes>
 							</instrumentation>
 						</configuration>
