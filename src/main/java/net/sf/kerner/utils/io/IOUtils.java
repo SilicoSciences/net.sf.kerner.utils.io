@@ -56,11 +56,6 @@ public class IOUtils {
 	/**
 	 * 
 	 */
-	public static final int DEFAULT_READ_AHEAD_LIMIT = DEFAULT_BUFFER;
-
-	/**
-	 * 
-	 */
 	public final static String NEW_LINE_STRING = System
 			.getProperty("line.separator");
 
@@ -136,7 +131,7 @@ public class IOUtils {
 	 * @see Serializable
 	 * @param s
 	 *            {@code Object} that will be serialized
-	 * @param sstream
+	 * @param stream
 	 *            stream to write to
 	 * @throws IOException
 	 *             if anything goes wrong

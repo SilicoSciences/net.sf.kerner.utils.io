@@ -265,7 +265,7 @@ public class BufferedStringReader implements Closeable, CharReader {
 	 *         line-termination characters, or null if the end of the stream has
 	 *         been reached
 	 * @throws IOException
-	 * @see {@link java.io.BufferedReader#readLine()}
+	 * @see java.io.BufferedReader#readLine()
 	 */
 	public synchronized String nextLine() throws IOException {
 		return reader.readLine();
