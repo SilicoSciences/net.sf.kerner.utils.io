@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import net.sf.kerner.utils.io.CharWriter;
 import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.LineWriter;
 import net.sf.kerner.utils.io.ObjectWriter;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedWriter;
+import net.sf.kerner.utils.io.buffered.CharWriter;
 
 /**
  * A {@code BufferedStringWriter} provides the ability to write a string
