@@ -27,11 +27,11 @@ import net.sf.kerner.utils.io.IOUtils;
  * 
  * 
  * {@code AbstractGenericReader} is a prototye implementation for
- * {@link GenericReader}.
+ * {@link net.sf.kerner.utils.io.GenericReader GenericReader}.
  * 
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-10-26
+ * @version 2010-11-26
  * 
  */
 public abstract class AbstractGenericReader<T> implements GenericReader<T> {
