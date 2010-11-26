@@ -44,13 +44,10 @@ import java.io.Reader;
  */
 public interface GenericReader<T> {
 
-	// lastVisit 2010-08-23
-
 	/**
 	 * 
-	 * <p>
 	 * Read something from a {@link File}.
-	 * </p>
+	 * 
 	 * 
 	 * <p>
 	 * TODO example
@@ -65,9 +62,8 @@ public interface GenericReader<T> {
 
 	/**
 	 * 
-	 * <p>
 	 * Read something from a {@link Reader}.
-	 * </p>
+	 * 
 	 * 
 	 * <p>
 	 * TODO example
@@ -82,9 +78,8 @@ public interface GenericReader<T> {
 
 	/**
 	 * 
-	 * <p>
 	 * Read something from an {@link InputStream}.
-	 * </p>
+	 * 
 	 * 
 	 * <p>
 	 * TODO example
