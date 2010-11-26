@@ -30,9 +30,8 @@ public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next bunch of chars, using a given buffer size.
-	 * </p>
+	 * 
 	 * <p>
 	 * If available number of characters is smaller than {@code bufferSize},
 	 * returned array contains all available characters and its size is equal to the
@@ -52,7 +51,6 @@ public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next bunch of chars, using a default buffer size (
 	 * {@link IOUtils#DEFAULT_BUFFER})
 	 * <p>
@@ -74,9 +72,7 @@ public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next single char.
-	 * </p>
 	 * 
 	 * 
 	 * @return the single char that has been read or -1 if there is nothing left
