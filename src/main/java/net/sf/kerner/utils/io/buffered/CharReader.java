@@ -13,9 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
 
-package net.sf.kerner.utils.io;
+package net.sf.kerner.utils.io.buffered;
 
 import java.io.IOException;
+
+import net.sf.kerner.utils.io.IOUtils;
 
 /**
  * <p>

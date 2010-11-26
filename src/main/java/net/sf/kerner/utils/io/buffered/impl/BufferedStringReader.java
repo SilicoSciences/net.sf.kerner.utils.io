@@ -23,8 +23,8 @@ import java.io.InputStream;
 import java.io.Reader;
 
 import net.sf.kerner.utils.ArrayUtils;
-import net.sf.kerner.utils.io.CharReader;
 import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.buffered.CharReader;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
 /**
