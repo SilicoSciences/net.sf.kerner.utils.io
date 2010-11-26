@@ -26,7 +26,7 @@ import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedReader;
 import net.sf.kerner.utils.io.buffered.IOIterator;
 import net.sf.kerner.utils.io.buffered.IOIteratorPrimitive;
-import net.sf.kerner.utils.io.stolen.ArithmeticSavety;
+import net.sf.kerner.utils.math.ArithmeticSavety;
 
 /**
  * 
