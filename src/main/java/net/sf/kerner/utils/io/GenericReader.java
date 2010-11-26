@@ -24,11 +24,11 @@ import java.io.Reader;
  * A {@code GenericReader} provides the ability to read something from
  * <ul>
  * <li>
- * a {@link File}</li>
+ * a {@link java.io.File File}</li>
  * <li>
- * a {@link Reader}</li>
+ * a {@link java.io.Reader Reader}</li>
  * <li>
- * an {@link InputStream}</li>
+ * an {@link java.io.InputStream IntputStream}</li>
  * </ul>
  * </p>
  * <p>
@@ -37,9 +37,9 @@ import java.io.Reader;
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-19
- * @see File
- * @see Reader
- * @see InputStream
+ * @see java.io.File File
+ * @see java.io.Reader Reader
+ * @see java.io.InputStream InputStream
  * 
  */
 public interface GenericReader<T> {
