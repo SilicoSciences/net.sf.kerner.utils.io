@@ -15,7 +15,7 @@ limitations under the License.
 
 package net.sf.kerner.utils.io.buffered;
 
-public interface IOIteratorPrimitive {
+public interface GeneralIOIterator {
 
 	boolean hasNext();
 

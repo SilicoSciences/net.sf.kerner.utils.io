@@ -41,6 +41,6 @@ public interface IOIterablePrimitve {
 	 *
 	 * @return the {@code IOIterator}
 	 */
-	IOIteratorPrimitive getIterator();
+	GeneralIOIterator getIterator();
 
 }

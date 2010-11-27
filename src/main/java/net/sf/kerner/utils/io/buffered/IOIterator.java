@@ -41,7 +41,7 @@ import java.io.IOException;
  *            type of elements which are returned by this {@code IOIterator}
  * @see java.util.Iterator
  */
-public interface IOIterator<E> extends IOIteratorPrimitive {
+public interface IOIterator<E> extends GeneralIOIterator {
 
 	/**
 	 * 
