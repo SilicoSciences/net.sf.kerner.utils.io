@@ -31,7 +31,7 @@ import net.sf.kerner.utils.io.IOUtils;
  * this reader.
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
+ * @version 2010-11-27
  * 
  */
 public abstract class AbstractBufferedReader {
