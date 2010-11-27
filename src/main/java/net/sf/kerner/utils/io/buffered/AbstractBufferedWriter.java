@@ -85,14 +85,18 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
 	 * Close this {@code AbstractBufferedWriter}.
 	 */
 	public void close() {
+		synchronized(writer){
 		IOUtils.closeProperly(writer);
+		}
 	}
 
 	/**
 	 * Flush this {@code AbstractBufferedWriter}.
 	 */
 	public void flush() throws IOException {
+		synchronized(writer){
 		writer.flush();
+		}
 	}
 
 }
