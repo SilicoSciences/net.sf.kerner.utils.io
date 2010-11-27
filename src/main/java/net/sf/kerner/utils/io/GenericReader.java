@@ -49,11 +49,6 @@ public interface GenericReader<T> {
 	 * 
 	 * Read something from a {@link File}.
 	 * 
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
-	 * 
 	 * @param file
 	 *            file that is read
 	 * @return something that is read from this file
@@ -65,11 +60,6 @@ public interface GenericReader<T> {
 	 * 
 	 * Read something from a {@link Reader}.
 	 * 
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
-	 * 
 	 * @param reader
 	 *            {@link Reader} from which is read
 	 * @return something that is read from this {@link Reader}
@@ -80,11 +70,6 @@ public interface GenericReader<T> {
 	/**
 	 * 
 	 * Read something from an {@link InputStream}.
-	 * 
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
 	 * 
 	 * @param stream
 	 *            {@link InputStream} from which is read
