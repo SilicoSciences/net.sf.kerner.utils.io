@@ -13,15 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
 
-package net.sf.kerner.utils.io.buffered;
+package net.sf.kerner.utils.io;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.kerner.utils.io.GenericReader;
-import net.sf.kerner.utils.io.IOUtils;
 
 /**
  * 

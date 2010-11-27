@@ -53,13 +53,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	protected volatile long currentIndex = 0L;
 
-	/**
-	 * 
-	 * TODO description
-	 *
-	 * @param reader
-	 * @throws IOException
-	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
 		assign();
