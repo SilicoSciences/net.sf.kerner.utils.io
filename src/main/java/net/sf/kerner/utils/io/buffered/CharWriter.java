@@ -19,7 +19,7 @@ import java.io.IOException;
 
 /**
  * 
- * TODO description
+ *A {@code CharWriter} provides methods for writing characters.
  * 
  * <p>
  * <b>Example:</b><br>
@@ -39,8 +39,22 @@ import java.io.IOException;
  */
 public interface CharWriter {
 
+	/**
+	 * 
+	 * Write the next single char.
+	 *
+	 * @param c char to write
+	 * @throws IOException if writing fails
+	 */
 	void write(char c) throws IOException;
 
+	/**
+	 * 
+	 * Write the next bunch of chars
+	 *
+	 * @param chars char array to write
+	 * @throws IOException if writing fails
+	 */
 	void write(char[] chars) throws IOException;
 
 }
