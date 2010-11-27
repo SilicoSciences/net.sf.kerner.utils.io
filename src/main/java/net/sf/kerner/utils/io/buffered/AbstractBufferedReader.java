@@ -100,8 +100,15 @@ public abstract class AbstractBufferedReader {
 					IOUtils.inputStreamToReader(stream));
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Close this {@code AbstractBufferedReader}.
+	 *
+	 */
 	public void close() {
-		IOUtils.closeProperly(reader);
+		synchronized (reader) {
+			IOUtils.closeProperly(reader);
+		}
 	}
 }
