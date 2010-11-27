@@ -56,7 +56,8 @@ public interface IOIterable<E> {
 	 * 
 	 * Retrieve the {@code IOIterator}.
 	 * 
-	 * @return the @code IOIterator}
+	 * @return the {@code IOIterator}
+	 * 
 	 * @throws IOException
 	 *             if anything goes wrong
 	 */
