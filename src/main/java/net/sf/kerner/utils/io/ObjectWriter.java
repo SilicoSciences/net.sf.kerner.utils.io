@@ -19,7 +19,7 @@ import java.io.IOException;
 
 /**
  * 
- * TODO description
+ * An {@code ObjectWriter} writes elements of type {@code E}.
  * 
  * <p>
  * <b>Example:</b><br>
@@ -34,12 +34,19 @@ import java.io.IOException;
  * </p>
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
+ * @version 2010-11-27
  * 
- * @param <E>
+ * @param <E> type of element
  */
 public interface ObjectWriter<E> {
 
+	/**
+	 * 
+	 * Write element.
+	 *
+	 * @param e element to write
+	 * @throws IOException if writing fails
+	 */
 	void write(E e) throws IOException;
 
 }
