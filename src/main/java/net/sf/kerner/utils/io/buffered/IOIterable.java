@@ -39,7 +39,7 @@ import java.io.IOException;
  * 
  * @param <E>
  *            type of elements which are iterated
- * @see java.util.Iterable Iterable
+ * @see java.lang.Iterable Iterable
  */
 public interface IOIterable<E> {
 
