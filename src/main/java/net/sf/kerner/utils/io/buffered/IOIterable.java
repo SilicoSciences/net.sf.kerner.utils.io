@@ -19,17 +19,9 @@ import java.io.IOException;
 
 /**
  * 
+ * An instance of {@code IOIterable} provides an [@link IOIterator} for reading
+ * elements in an iterator based manner.
  * 
- * Iterates over a
- * <ul>
- * <li>
- * a {@link java.io.File}</li>
- * <li>
- * a {@link java.io.Writer}</li>
- * <li>
- * an {@link java.io.InputStream}</li>
- * </ul>
- * and read elements in an iterator like manner.
  * <p>
  * <b>Example:</b><br>
  * 
@@ -46,13 +38,12 @@ import java.io.IOException;
  * @version 2010-10-25
  * 
  * @param <E>
- *            type of elements which are returned by this {@code IOIterator}
- * @see java.util.Iterator
+ *            type of elements which are iterated
+ * @see java.util.Iterable Iterable
  */
 public interface IOIterable<E> {
 
 	/**
-	 * 
 	 * 
 	 * Retrieve the {@code IOIterator}.
 	 * 
