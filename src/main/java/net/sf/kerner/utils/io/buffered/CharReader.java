@@ -20,12 +20,12 @@ import java.io.IOException;
 import net.sf.kerner.utils.io.IOUtils;
 
 /**
- * <p>
+ * 
  * A {@code CharReader} provides methods for reading characters.
- * </p>
+ * 
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
+ * @version 2010-11-27
  * 
  */
 public interface CharReader {
