@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.kerner-utils</groupId>
 	<artifactId>io</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Kerner-Utils-IO</name>
 	<description>Commonly used utility classes (IO related).</description>
 	<url>http://kerner-utils-io.sourceforge.net/</url>
