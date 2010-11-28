@@ -39,7 +39,7 @@ import net.sf.kerner.utils.io.buffered.AbstractBufferedWriter;
  * </p>
  * <p>
  * <b>Note:</b> writing is buffered. If you want to write quickly small files at
- * once, consider to use {@link LazyStringWriter} instead.
+ * once, consider to use {@link net.sf.kerner.utils.io.lazy.LazyStringWriter LazyStringWriter} instead.
  * </p>
  * <p>
  * <b>Example:</b>
@@ -127,7 +127,7 @@ public class BufferedStringWriter extends AbstractBufferedWriter implements Char
 	 * 
 	 * <p>
 	 * Construct a new {@code BufferedStringWriter} that will write a String to
-	 * a {@link java.io.Writer}.
+	 * a {@link java.io.Writer Writer}.
 	 * </p>
 	 * 
 	 * 
@@ -142,7 +142,7 @@ public class BufferedStringWriter extends AbstractBufferedWriter implements Char
 	 * 
 	 * <p>
 	 * Construct a new {@code BufferedStringWriter} that will write a String to
-	 * a {@link java.io.OutputStream}.
+	 * a {@link java.io.OutputStream OutputStream}.
 	 * </p>
 	 * 
 	 * 
@@ -174,7 +174,7 @@ public class BufferedStringWriter extends AbstractBufferedWriter implements Char
 	/**
 	 * 
 	 * 
-	 * Write the next string and append a {@link FileUtils#NEW_LINE}.
+	 * Write the next string and append a {@link IOUtils#NEW_LINE_STRING}.
 	 * 
 	 *
 	 * @param line line that is written

@@ -6,7 +6,7 @@
 	<name>Kerner-Utils-IO</name>
 	<description>Commonly used utility classes (IO related).</description>
 	<url>http://kerner-utils-io.sourceforge.net/</url>
-		<properties>
+	<properties>
 		<jdk.version>1.5</jdk.version>
 	</properties>
 	<developers>
@@ -62,16 +62,11 @@
 		</plugins>
 	</build>
 	<dependencies>
-	
-		<dependency>
-			<groupId>net.sf.kerner-utils</groupId>
-			<artifactId>kerner-utils</artifactId>
-			<version>0.0.2</version>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<profiles>
@@ -160,20 +155,19 @@
 								<format>xml</format>
 							</formats>
 							<check>
-								<branchRate>50</branchRate>
-								<lineRate>50</lineRate>
+								<lineRate>70</lineRate>
 								<haltOnFailure>false</haltOnFailure>
-								<totalBranchRate>50</totalBranchRate>
-								<totalLineRate>50</totalLineRate>
-								<packageLineRate>50</packageLineRate>
-								<packageBranchRate>50</packageBranchRate>
+								<totalLineRate>70</totalLineRate>
+								<packageLineRate>70</packageLineRate>
 							</check>
 							<instrumentation>
 								<ignores>
 									<ignore>*Exception.class</ignore>
+									<ignore>net.sf.kerner.utils.io.stolen.*</ignore>
 								</ignores>
 								<excludes>
 									<exclude>*Exception.class</exclude>
+									<exclude>net/sf/kerner/utils/io/stolen/*.class</exclude>
 								</excludes>
 							</instrumentation>
 						</configuration>

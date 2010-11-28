@@ -22,9 +22,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import net.sf.kerner.utils.ArrayUtils;
 import net.sf.kerner.utils.io.CharReader;
 import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.lazy.LazyStringReader;
+import net.sf.kerner.utils.io.stolen.ArrayUtils;
 
 /**
  * A {@code BufferedStringReader} provides the ability to read a string buffered
@@ -264,7 +265,7 @@ public class BufferedStringReader implements Closeable, CharReader {
 	 *         line-termination characters, or null if the end of the stream has
 	 *         been reached
 	 * @throws IOException
-	 * @see {@link java.io.BufferedReader#readLine()}
+	 * @see java.io.BufferedReader#readLine()
 	 */
 	public synchronized String nextLine() throws IOException {
 		return reader.readLine();
@@ -295,7 +296,7 @@ public class BufferedStringReader implements Closeable, CharReader {
 			// nothing left to read
 			return null;
 		}
-		return ArrayUtils.arrayTrim(buffer, read);
+		return ArrayUtils.trim(buffer, read);
 	}
 
 	/**

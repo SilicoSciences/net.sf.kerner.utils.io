@@ -22,11 +22,11 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.NoSuchElementException;
 
-import net.sf.kerner.utils.Utils;
 import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedReader;
 import net.sf.kerner.utils.io.buffered.IOIterator;
 import net.sf.kerner.utils.io.buffered.IOIteratorPrimitive;
+import net.sf.kerner.utils.io.stolen.ArithmeticSavety;
 
 /**
  * 
@@ -363,7 +363,7 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public synchronized long nextIndex() {
 		if (checkIndexOverflow)
-			return Utils.rangeCheckAdd(currentIndex, 1);
+			return ArithmeticSavety.addLong(Long.valueOf(currentIndex), 1L);
 		return currentIndex + 1;
 	}
 
