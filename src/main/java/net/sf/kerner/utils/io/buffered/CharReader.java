@@ -13,26 +13,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
 
-package net.sf.kerner.utils.io;
+package net.sf.kerner.utils.io.buffered;
 
 import java.io.IOException;
 
+import net.sf.kerner.utils.io.IOUtils;
+
 /**
- * <p>
+ * 
  * A {@code CharReader} provides methods for reading characters.
- * </p>
+ * 
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
+ * @version 2010-11-27
  * 
  */
 public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next bunch of chars, using a given buffer size.
-	 * </p>
+	 * 
 	 * <p>
 	 * If available number of characters is smaller than {@code bufferSize},
 	 * returned array contains all available characters and its size is equal to the
@@ -52,7 +53,6 @@ public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next bunch of chars, using a default buffer size (
 	 * {@link IOUtils#DEFAULT_BUFFER})
 	 * <p>
@@ -74,9 +74,7 @@ public interface CharReader {
 
 	/**
 	 * 
-	 * <p>
 	 * Read the next single char.
-	 * </p>
 	 * 
 	 * 
 	 * @return the single char that has been read or -1 if there is nothing left

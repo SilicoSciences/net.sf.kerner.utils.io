@@ -37,7 +37,7 @@ import java.util.NoSuchElementException;
  * </p>
  *
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-22
+ * @version 2010-11-27
  *
  * @param <E> type of elements which are iterated / read by this {@code AbstractIOIterator}
  */
@@ -55,10 +55,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 
 	/**
 	 * 
-	 * TODO description
+	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.BufferedReader BufferedReader}.
 	 *
-	 * @param reader
-	 * @throws IOException
+	 * @param reader {@code BufferedReader} to read from
+	 * @throws IOException if reading fails
 	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
@@ -67,10 +67,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 
 	/**
 	 * 
-	 * TODO description
+	 * Create a new {@code AbstractIOIterator} that reads from given file.
 	 *
-	 * @param file
-	 * @throws IOException
+	 * @param file file to read from
+	 * @throws IOException if reading fails
 	 */
 	public AbstractIOIterator(File file) throws IOException {
 		super(file);
@@ -79,10 +79,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 
 	/**
 	 * 
-	 * TODO description
+	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.InputStream InputStream}.
 	 *
-	 * @param stream
-	 * @throws IOException
+	 * @param stream {@code InputStream} to read from
+	 * @throws IOException if reading fails
 	 */
 	public AbstractIOIterator(InputStream stream) throws IOException {
 		super(stream);
@@ -91,10 +91,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 
 	/**
 	 * 
-	 * TODO description
+	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.Reader Reader}.
 	 *
-	 * @param reader
-	 * @throws IOException
+	 * @param reader reader to read from
+	 * @throws IOException if reading fails
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
@@ -133,10 +133,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	
 	/**
 	 * 
-	 * TODO description
+	 * Perform the read operation.
 	 *
-	 * @return
-	 * @throws IOException
+	 * @return the read element of type {@code E}
+	 * @throws IOException if reading fails
 	 */
 	protected abstract E doRead() throws IOException;
 	

@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import net.sf.kerner.utils.io.CharReader;
+import net.sf.kerner.utils.ArrayUtils;
 import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.buffered.CharReader;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
-import net.sf.kerner.utils.io.stolen.ArrayUtils;
 
 /**
  * A {@code BufferedStringReader} provides the ability to read a string buffered

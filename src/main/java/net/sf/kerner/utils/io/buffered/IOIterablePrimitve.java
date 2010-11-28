@@ -17,8 +17,7 @@ package net.sf.kerner.utils.io.buffered;
 
 /**
  * 
- *
- * TODO description
+ * An instance of {@code IOIterablePrimitive} can be iterated using an {@link IOIterator} 
  * 
  * <p>
  * <b>Example:</b><br>
@@ -37,6 +36,11 @@ package net.sf.kerner.utils.io.buffered;
  */
 public interface IOIterablePrimitve {
 	
-	IOIteratorPrimitive getIterator();
+	/**
+	 * Retrieve the {@link IOIterator}.
+	 *
+	 * @return the {@code IOIterator}
+	 */
+	GeneralIOIterator getIterator();
 
 }

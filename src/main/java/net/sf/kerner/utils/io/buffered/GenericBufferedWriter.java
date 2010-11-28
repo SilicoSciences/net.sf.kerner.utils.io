@@ -12,25 +12,38 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
+
 package net.sf.kerner.utils.io.buffered;
 
 import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * <p>
- * TODO description
- * </p>
+ * 
+ * A {@code GenericBufferedWriter} writes something in a buffered manner.
  * 
  * <p>
+ * <b>Example:</b><br>
+ *
+ * </p>
+ * <p>
+ * <pre>
  * TODO example
+ * </pre>
  * </p>
- * 
- * @author Alexander Kerner
- * 
+ *
+ * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
+ * @version 2010-11-27
+ *
  */
 public interface GenericBufferedWriter extends Closeable {
 	
+	/**
+	 * 
+	 * Flush this {@code GenericBufferedWriter}.
+	 *
+	 * @throws IOException if flushing fails
+	 */
 	void flush() throws IOException;
 
 }

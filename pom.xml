@@ -68,6 +68,11 @@
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.kerner-utils</groupId>
+			<artifactId>kerner-utils</artifactId>
+			<version>0.0.4</version>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
@@ -162,12 +167,16 @@
 							</check>
 							<instrumentation>
 								<ignores>
-									<ignore>*Exception.class</ignore>
-									<ignore>net.sf.kerner.utils.io.stolen.*</ignore>
+									<ignore>*.*Exception.class</ignore>
+									<ignore>net.sf.kerner.utils.io.AbstractGenericReader*</ignore>
+									<ignore>net.sf.kerner.utils.io.buffered.AbstractBufferedReader*</ignore>
+									<ignore>net.sf.kerner.utils.io.buffered.AbstractBufferedWriter*</ignore>
 								</ignores>
 								<excludes>
 									<exclude>*Exception.class</exclude>
-									<exclude>net/sf/kerner/utils/io/stolen/*.class</exclude>
+									<exclude>net/sf/kerner/utils/io/AbstractGenericReader*</exclude>
+									<exclude>net/sf/kerner/utils/io/buffered/AbstractBufferedReader*</exclude>
+									<exclude>net/sf/kerner/utils/io/buffered/AbstractBufferedWriter*</exclude>
 								</excludes>
 							</instrumentation>
 						</configuration>

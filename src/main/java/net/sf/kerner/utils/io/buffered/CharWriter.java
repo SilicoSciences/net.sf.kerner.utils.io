@@ -13,43 +13,48 @@ See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
 
-package net.sf.kerner.utils.io.impl;
+package net.sf.kerner.utils.io.buffered;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-
-import net.sf.kerner.utils.io.GenericReader;
-import net.sf.kerner.utils.io.IOUtils;
 
 /**
  * 
+ *A {@code CharWriter} provides methods for writing characters.
  * 
- * {@code AbstractGenericReader} is a prototye implementation for
- * {@link GenericReader}.
+ * <p>
+ * <b>Example:</b><br>
  * 
+ * </p>
+ * <p>
+ * 
+ * <pre>
+ * TODO example
+ * </pre>
+ * 
+ * </p>
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-10-26
+ * @version 2010-11-19
  * 
  */
-public abstract class AbstractGenericReader<T> implements GenericReader<T> {
-	
-	// Implement //
+public interface CharWriter {
 
 	/**
 	 * 
+	 * Write the next single char.
+	 *
+	 * @param c char to write
+	 * @throws IOException if writing fails
 	 */
-	public T read(File file) throws IOException {
-		return read(new FileInputStream(file));
-	}
+	void write(char c) throws IOException;
 
 	/**
 	 * 
+	 * Write the next bunch of chars
+	 *
+	 * @param chars char array to write
+	 * @throws IOException if writing fails
 	 */
-	public T read(InputStream stream) throws IOException {
-		return read(IOUtils.inputStreamToReader(stream));
-	}
+	void write(char[] chars) throws IOException;
 
 }

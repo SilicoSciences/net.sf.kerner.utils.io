@@ -13,34 +13,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
 
-package net.sf.kerner.utils.io;
+package net.sf.kerner.utils.io.buffered;
 
-import java.io.IOException;
+public interface GeneralIOIterator {
 
-/**
- * 
- * TODO description
- * 
- * <p>
- * <b>Example:</b><br>
- * 
- * </p>
- * <p>
- * 
- * <pre>
- * TODO example
- * </pre>
- * 
- * </p>
- * 
- * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
- * 
- */
-public interface CharWriter {
+	boolean hasNext();
 
-	void write(char c) throws IOException;
-
-	void write(char[] chars) throws IOException;
+	long nextIndex();
+	
+	void close();
 
 }

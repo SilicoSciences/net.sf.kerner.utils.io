@@ -25,8 +25,8 @@ import java.util.NoSuchElementException;
 import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedReader;
 import net.sf.kerner.utils.io.buffered.IOIterator;
-import net.sf.kerner.utils.io.buffered.IOIteratorPrimitive;
-import net.sf.kerner.utils.io.stolen.ArithmeticSavety;
+import net.sf.kerner.utils.io.buffered.GeneralIOIterator;
+import net.sf.kerner.utils.math.ArithmeticSavety;
 
 /**
  * 
@@ -123,7 +123,7 @@ import net.sf.kerner.utils.io.stolen.ArithmeticSavety;
  * 
  */
 public class CharIterator extends AbstractBufferedReader implements
-		IOIteratorPrimitive {
+		GeneralIOIterator {
 
 	// Field //
 

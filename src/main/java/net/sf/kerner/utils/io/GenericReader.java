@@ -12,6 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  ***********************************************************************/
+
 package net.sf.kerner.utils.io;
 
 import java.io.File;
@@ -24,11 +25,11 @@ import java.io.Reader;
  * A {@code GenericReader} provides the ability to read something from
  * <ul>
  * <li>
- * a {@link File}</li>
+ * a {@link java.io.File File}</li>
  * <li>
- * a {@link Reader}</li>
+ * a {@link java.io.Reader Reader}</li>
  * <li>
- * an {@link InputStream}</li>
+ * an {@link java.io.InputStream IntputStream}</li>
  * </ul>
  * </p>
  * <p>
@@ -37,24 +38,16 @@ import java.io.Reader;
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-19
- * @see File
- * @see Reader
- * @see InputStream
+ * @see java.io.File File
+ * @see java.io.Reader Reader
+ * @see java.io.InputStream InputStream
  * 
  */
 public interface GenericReader<T> {
 
-	// lastVisit 2010-08-23
-
 	/**
 	 * 
-	 * <p>
 	 * Read something from a {@link File}.
-	 * </p>
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
 	 * 
 	 * @param file
 	 *            file that is read
@@ -65,13 +58,7 @@ public interface GenericReader<T> {
 
 	/**
 	 * 
-	 * <p>
 	 * Read something from a {@link Reader}.
-	 * </p>
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
 	 * 
 	 * @param reader
 	 *            {@link Reader} from which is read
@@ -82,13 +69,7 @@ public interface GenericReader<T> {
 
 	/**
 	 * 
-	 * <p>
 	 * Read something from an {@link InputStream}.
-	 * </p>
-	 * 
-	 * <p>
-	 * TODO example
-	 * </p>
 	 * 
 	 * @param stream
 	 *            {@link InputStream} from which is read
