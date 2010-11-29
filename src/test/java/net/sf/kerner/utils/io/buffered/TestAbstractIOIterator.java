@@ -5,7 +5,11 @@ package net.sf.kerner.utils.io.buffered;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.io.StringReader;
 
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
@@ -24,7 +28,27 @@ import org.junit.Test;
  */
 public class TestAbstractIOIterator {
 	
-	private String in = "input";
+	private static class My extends AbstractIOIterator<String> {
+		
+		protected final BufferedStringReader reader2 = new BufferedStringReader(super.reader);
+
+		public My(Reader reader) throws IOException {
+			super(reader);
+		}
+
+		@Override
+		protected String doRead() throws IOException {
+			return doRead(2);
+		}
+
+		@Override
+		protected String doRead(int bufferSize) throws IOException {
+			System.err.println(reader2);
+			return reader2.nextString(bufferSize);
+		}
+	}
+	
+	private String in;
 	private AbstractIOIterator<String> it;
 
 	@BeforeClass
@@ -37,27 +61,14 @@ public class TestAbstractIOIterator {
 
 	@Before
 	public void setUp() throws Exception {
-		it = new AbstractIOIterator<String>(new StringReader(in)){
-			
-			protected final BufferedStringReader reader2 = new BufferedStringReader(
-					super.reader);
-
-			@Override
-			protected String doRead() throws IOException {
-				return doRead(2);
-			}
-
-			@Override
-			protected String doRead(int bufferSize) throws IOException {
-				return reader2.nextString(bufferSize);
-			}
-			
-		};
+		in = "input";
+		it = new My(new StringReader(in));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		it = null;
+		in = null;
 	}
 
 	/**
