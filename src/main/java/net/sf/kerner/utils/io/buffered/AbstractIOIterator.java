@@ -62,7 +62,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
-		assign();
+		peek = doRead();
 	}
 
 	/**
@@ -74,7 +74,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(File file) throws IOException {
 		super(file);
-		assign();
+		peek = doRead();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(InputStream stream) throws IOException {
 		super(stream);
-		assign();
+		peek = doRead();
 	}
 
 	/**
@@ -98,10 +98,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
-		assign();
-	}
-	
-	private void assign() throws IOException{
 		peek = doRead();
 	}
 
@@ -125,7 +121,19 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	public synchronized E next() throws IOException {
 		if (hasNext()) {
 			final E result = peek;
-			assign();
+			peek = doRead();
+			return result;
+		}
+		throw new NoSuchElementException("no more elements");
+	}
+	
+	/**
+	 * 
+	 */
+	public synchronized E next(int bufferSize) throws IOException {
+		if (hasNext()) {
+			final E result = peek;
+			peek = doRead(bufferSize);
 			return result;
 		}
 		throw new NoSuchElementException("no more elements");
@@ -139,5 +147,15 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * @throws IOException if reading fails
 	 */
 	protected abstract E doRead() throws IOException;
+	
+	/**
+	 * 
+	 * Perform the read operation, using given buffer size.
+	 *
+	 * @return the read element of type {@code E}
+	 * @param bufferSize buffer size to use for reading
+	 * @throws IOException if reading fails
+	 */
+	protected abstract E doRead(int bufferSize) throws IOException;
 	
 }
