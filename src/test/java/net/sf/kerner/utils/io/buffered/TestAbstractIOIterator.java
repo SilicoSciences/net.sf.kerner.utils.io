@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.io.StringReader;
 
+import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,17 +38,18 @@ public class TestAbstractIOIterator {
 	@Before
 	public void setUp() throws Exception {
 		it = new AbstractIOIterator<String>(new StringReader(in)){
+			
+			protected final BufferedStringReader reader2 = new BufferedStringReader(
+					super.reader);
 
 			@Override
 			protected String doRead() throws IOException {
-				// TODO Auto-generated method stub
-				return null;
+				return doRead(2);
 			}
 
 			@Override
 			protected String doRead(int bufferSize) throws IOException {
-				// TODO Auto-generated method stub
-				return null;
+				return reader2.nextString(bufferSize);
 			}
 			
 		};
@@ -62,7 +65,16 @@ public class TestAbstractIOIterator {
 	 */
 	@Test
 	public final void testHasNext() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(it.hasNext());
+	}
+	
+	/**
+	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+	 */
+	@Test
+	public final void testHasNext01() {
+		it.close();
+		assertFalse(it.hasNext());
 	}
 
 	/**
