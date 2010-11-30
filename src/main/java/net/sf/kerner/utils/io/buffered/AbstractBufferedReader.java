@@ -18,7 +18,7 @@ package net.sf.kerner.utils.io.buffered;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Reader;
 
@@ -48,10 +48,10 @@ public abstract class AbstractBufferedReader {
 	 * 
 	 * @param file
 	 *            file from which is read
-	 * @throws IOException
+	 * @throws FileNotFoundException 
 	 * @see java.io.File
 	 */
-	public AbstractBufferedReader(File file) throws IOException {
+	public AbstractBufferedReader(File file) throws FileNotFoundException {
 		synchronized (AbstractBufferedReader.class) {
 			this.reader = new BufferedReader(
 					IOUtils.inputStreamToReader(new FileInputStream(file)));
