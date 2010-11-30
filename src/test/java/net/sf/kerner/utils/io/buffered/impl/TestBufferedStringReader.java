@@ -14,6 +14,7 @@ limitations under the License.
  ***********************************************************************/
 package net.sf.kerner.utils.io.buffered.impl;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
@@ -164,6 +165,19 @@ public class TestBufferedStringReader {
 		final String s2 = reader.nextString(5);
 		reader.close();
 		assertEquals(s, s2);
+	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.kerner.commons.io.buffered.BufferedStringReader#nextString(int)}
+	 * .
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public final void testNextStringInt04() throws IOException {
+		reader.nextString();
+		assertNull(reader.nextString());
 	}
 
 	/**
