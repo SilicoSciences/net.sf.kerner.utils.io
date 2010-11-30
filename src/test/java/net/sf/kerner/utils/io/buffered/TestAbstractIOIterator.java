@@ -11,6 +11,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.NoSuchElementException;
 
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 
@@ -39,12 +40,8 @@ public class TestAbstractIOIterator {
 
 		@Override
 		protected String doRead() throws IOException {
-			return doRead(2);
-		}
-
-		@Override
-		protected String doRead(int bufferSize) throws IOException {
-			return reader2.nextString(bufferSize);
+			String s = reader2.nextString();
+			return s;
 		}
 	}
 	
@@ -61,7 +58,7 @@ public class TestAbstractIOIterator {
 
 	@Before
 	public void setUp() throws Exception {
-		in = "input";
+		in = "input001";
 		it = new My(new StringReader(in));
 	}
 
@@ -98,37 +95,15 @@ public class TestAbstractIOIterator {
 		String s = it.next();
 		assertEquals(in, s);
 	}
-
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next(int)}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testNextInt() throws IOException {
-		String s = it.next(2);
-		assertEquals(in.substring(0,2), s);
-	}
 	
 	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next(int)}.
+	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
 	 * @throws IOException 
 	 */
-	@Test
-	public final void testNextInt01() throws IOException {
-		String s = it.next(2);
-		s = it.next();
-		assertEquals("pu", s);
-	}
-	
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next(int)}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testNextInt02() throws IOException {
-		String s = it.next(2);
-		s = it.next(10000);
-		assertEquals(in.substring(2), s);
+	@Test(expected=NoSuchElementException.class)
+	public final void testNext01() throws IOException {
+		it.next();
+		it.next();
 	}
 
 }

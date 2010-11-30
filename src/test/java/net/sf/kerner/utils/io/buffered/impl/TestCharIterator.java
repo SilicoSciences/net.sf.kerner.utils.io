@@ -132,17 +132,6 @@ public class TestCharIterator {
 		it = new CharIterator(input);
 		assertTrue(it.hasNext());
 	}
-	
-	/**
-	 * Test method for {@link net.sf.kerner.commons.io.buffered.CharIterator#hasNext()}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testHasNext01() throws IOException {
-		input = new StringReader("");
-		it = new CharIterator(input);
-		assertFalse(it.hasNext());
-	}
 
 	/**
 	 * Test method for {@link net.sf.kerner.commons.io.buffered.CharIterator#nextIndex()}.
