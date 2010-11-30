@@ -23,8 +23,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.NoSuchElementException;
 
-import net.sf.kerner.utils.io.IOUtils;
-
 /**
  * 
  * Prototype implementation for {@link IOIterator}.
