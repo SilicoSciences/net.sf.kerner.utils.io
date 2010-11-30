@@ -17,6 +17,7 @@ package net.sf.kerner.utils.io.buffered;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -62,9 +63,9 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.BufferedReader BufferedReader}.
 	 *
 	 * @param reader {@code BufferedReader} to read from
-	 * @throws IOException if reading fails
+	 *
 	 */
-	public AbstractIOIterator(BufferedReader reader) throws IOException {
+	public AbstractIOIterator(BufferedReader reader) {
 		super(reader);
 	}
 
@@ -73,9 +74,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * Create a new {@code AbstractIOIterator} that reads from given file.
 	 *
 	 * @param file file to read from
-	 * @throws IOException if reading fails
+	 * @throws FileNotFoundException 
+	 * 
 	 */
-	public AbstractIOIterator(File file) throws IOException {
+	public AbstractIOIterator(File file) throws FileNotFoundException  {
 		super(file);
 	}
 
@@ -86,7 +88,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * @param stream {@code InputStream} to read from
 	 * @throws IOException if reading fails
 	 */
-	public AbstractIOIterator(InputStream stream) throws IOException {
+	public AbstractIOIterator(InputStream stream) {
 		super(stream);
 	}
 
