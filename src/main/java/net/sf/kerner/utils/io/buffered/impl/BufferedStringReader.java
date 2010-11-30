@@ -229,7 +229,10 @@ public class BufferedStringReader implements Closeable, CharReader {
 	 *             if anything goes wrong
 	 */
 	public synchronized String nextString(int bufferSize) throws IOException {
-		return String.valueOf(nextChars(bufferSize));
+		final char[] result = nextChars(bufferSize);
+		if(result == null)
+			return null;
+		return String.valueOf(result);
 	}
 
 	/**
