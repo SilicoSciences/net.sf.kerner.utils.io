@@ -18,8 +18,6 @@ package net.sf.kerner.utils.io.buffered;
 public interface GeneralIOIterator {
 
 	boolean hasNext();
-
-	long nextIndex();
 	
 	void close();
 
