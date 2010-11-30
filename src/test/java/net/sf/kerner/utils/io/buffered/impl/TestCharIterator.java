@@ -12,6 +12,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.NoSuchElementException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -169,6 +170,35 @@ public class TestCharIterator {
 		assertEquals('s', it.nextChar());
 		assertEquals('t', it.nextChar());
 		assertFalse(it.hasNext());
+		it.close();
+	}
+	
+	/**
+	 * Test method for {@link net.sf.kerner.commons.io.buffered.CharIterator#nextChar()}.
+	 * @throws IOException 
+	 */
+	@Test(expected=NoSuchElementException.class)
+	public final void testNextOne01() throws IOException {
+		input = new StringReader("test");
+		it = new CharIterator(input);
+		assertTrue(it.hasNext());
+		assertEquals('t', it.nextChar());
+		assertEquals('e', it.nextChar());
+		assertEquals('s', it.nextChar());
+		assertEquals('t', it.nextChar());
+		it.nextChar();
+	}
+	
+	/**
+	 * Test method for {@link net.sf.kerner.commons.io.buffered.CharIterator#nextChar()}.
+	 * @throws IOException 
+	 */
+	@Test(expected=IOException.class)
+	public final void testNextOne02() throws IOException {
+		input = new StringReader("test");
+		it = new CharIterator(input);
+		it.close();
+		it.nextChar();
 	}
 
 	/**
@@ -206,9 +236,19 @@ public class TestCharIterator {
 		input = new StringReader("test");
 		it = new CharIterator(input);
 		assertTrue(it.hasNext());
-//		System.err.println(it.nextBunch(3));
 		assertArrayEquals(new char[]{'t','e','s'}, it.nextChars(3));
 		assertTrue(it.hasNext());
+	}
+	
+	/**
+	 * Test method for {@link net.sf.kerner.commons.io.buffered.CharIterator#nextChars(int)}.
+	 * @throws IOException 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public final void testNextBunchInt02() throws IOException {
+		input = new StringReader("test");
+		it = new CharIterator(input);
+		it.nextChars(-1);
 	}
 
 }
