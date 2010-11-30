@@ -151,7 +151,7 @@ public class CharIterator extends AbstractBufferedReader implements
 	 * </p>
 	 * 
 	 * @param reader
-	 *            @link BufferedReader} to which reading is delegated
+	 *            {@link BufferedReader} to which reading is delegated
 	 * @throws IOException
 	 *             if anything goes wrong
 	 */
