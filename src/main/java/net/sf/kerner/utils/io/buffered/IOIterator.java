@@ -53,16 +53,4 @@ public interface IOIterator<E> extends GeneralIOIterator {
 	 */
 	E next() throws IOException;
 
-	/**
-	 * 
-	 * Retrieve the next element, using given buffer size if applicable.
-	 * 
-	 * @param bufferSize
-	 *            buffer size to use for reading
-	 * @return the next element
-	 * @throws IOException
-	 *             if reading fails
-	 */
-	E next(int bufferSize) throws IOException;
-
 }
