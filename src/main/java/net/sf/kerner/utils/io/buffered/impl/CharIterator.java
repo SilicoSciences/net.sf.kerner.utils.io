@@ -133,14 +133,16 @@ public class CharIterator extends AbstractBufferedReader implements
 	private final boolean checkIndexOverflow;
 
 	/**
-	 * 
+	 * Peek element.
 	 */
-	private volatile int peekAhead = -1;
+	protected volatile int peek = -1;
 
 	/**
 	 * 
 	 */
 	private volatile long currentIndex = 0L;
+
+	private volatile boolean neu = true;
 
 	/**
 	 * 
@@ -157,7 +159,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public CharIterator(BufferedReader reader) throws IOException {
 		super(reader);
-		doRead();
 		this.checkIndexOverflow = false;
 	}
 
@@ -173,7 +174,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public CharIterator(File file) throws IOException {
 		super(file);
-		doRead();
 		this.checkIndexOverflow = false;
 	}
 
@@ -189,7 +189,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public CharIterator(InputStream stream) throws IOException {
 		super(stream);
-		doRead();
 		this.checkIndexOverflow = false;
 	}
 
@@ -203,7 +202,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public CharIterator(Reader reader) throws IOException {
 		super(reader);
-		doRead();
 		this.checkIndexOverflow = false;
 	}
 
@@ -219,7 +217,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	public CharIterator(Reader reader, boolean checkIndexOverflow)
 			throws IOException {
 		super(reader);
-		doRead();
 		this.checkIndexOverflow = checkIndexOverflow;
 	}
 
@@ -235,7 +232,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	public CharIterator(BufferedReader reader, boolean checkIndexOverflow)
 			throws IOException {
 		super(reader);
-		doRead();
 		this.checkIndexOverflow = checkIndexOverflow;
 	}
 
@@ -251,7 +247,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	public CharIterator(File file, boolean checkIndexOverflow)
 			throws IOException {
 		super(file);
-		doRead();
 		this.checkIndexOverflow = checkIndexOverflow;
 	}
 
@@ -267,7 +262,6 @@ public class CharIterator extends AbstractBufferedReader implements
 	public CharIterator(InputStream stream, boolean checkIndexOverflow)
 			throws IOException {
 		super(stream);
-		doRead();
 		this.checkIndexOverflow = checkIndexOverflow;
 	}
 
@@ -278,7 +272,7 @@ public class CharIterator extends AbstractBufferedReader implements
 	 * @throws IOException
 	 */
 	private synchronized void doRead() throws IOException {
-		peekAhead = super.reader.read();
+		peek = super.reader.read();
 	}
 
 	// Public //
@@ -295,12 +289,17 @@ public class CharIterator extends AbstractBufferedReader implements
 	 */
 	public synchronized char nextChar() throws IOException {
 		if (hasNext()) {
-			final char result = (char) peekAhead;
-			doRead();
-			return result;
+			try {
+				final char result = (char) peek;
+				doRead();
+				if (result == -1)
+					return nextChar();
+				return result;
+			} finally {
+				neu = false;
+			}
 		}
-		throw new NoSuchElementException("nothing left to read");
-
+		throw new NoSuchElementException("no more elements");
 	}
 
 	/**
@@ -336,6 +335,10 @@ public class CharIterator extends AbstractBufferedReader implements
 			result.append(nextChar());
 			cnt++;
 		}
+		if(checkIndexOverflow)
+			ArithmeticSavety.addLong(currentIndex, cnt);
+		else
+		currentIndex += cnt;
 		return result.toString().toCharArray();
 	}
 
@@ -343,19 +346,19 @@ public class CharIterator extends AbstractBufferedReader implements
 	 * 
 	 * 
 	 * close this {@code CharIterator}.
-	 *
+	 * 
 	 */
 	public void close() {
 		IOUtils.closeProperly(super.reader);
 	}
-	
+
 	// Implement //
 
 	/**
 	 * 
 	 */
 	public synchronized boolean hasNext() {
-		return peekAhead > -1;
+		return (peek != -1 || neu);
 	}
 
 	/**
