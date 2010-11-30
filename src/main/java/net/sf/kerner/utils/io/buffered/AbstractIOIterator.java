@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.NoSuchElementException;
 
+import net.sf.kerner.utils.io.IOUtils;
+
 /**
  * 
  * Prototype implementation for {@link IOIterator}.
@@ -52,6 +54,8 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * Current index of this {@code AbstractIOIterator}.
 	 */
 	protected volatile long currentIndex = 0L;
+	
+	private volatile boolean neu = true;
 
 	/**
 	 * 
@@ -62,7 +66,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
-		peek = doRead();
 	}
 
 	/**
@@ -74,7 +77,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(File file) throws IOException {
 		super(file);
-		peek = doRead();
 	}
 
 	/**
@@ -86,7 +88,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(InputStream stream) throws IOException {
 		super(stream);
-		peek = doRead();
 	}
 
 	/**
@@ -98,14 +99,13 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
-		peek = doRead();
 	}
 
 	/**
 	 * 
 	 */
 	public boolean hasNext() {
-		return peek != null;
+		return peek != null || neu;
 	}
 
 	/**
@@ -119,21 +119,19 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * 
 	 */
 	public synchronized E next() throws IOException {
-		if (hasNext()) {
-			final E result = peek;
-			peek = doRead();
-			return result;
-		}
-		throw new NoSuchElementException("no more elements");
+		return next(IOUtils.DEFAULT_BUFFER);
 	}
 	
 	/**
 	 * 
 	 */
 	public synchronized E next(int bufferSize) throws IOException {
+		neu = false;
 		if (hasNext()) {
 			final E result = peek;
 			peek = doRead(bufferSize);
+			if(result == null)
+				return next(bufferSize);
 			return result;
 		}
 		throw new NoSuchElementException("no more elements");
