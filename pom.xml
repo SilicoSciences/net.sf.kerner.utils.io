@@ -1,5 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>5</version>
+	</parent>
 	<groupId>net.sf.kerner-utils</groupId>
 	<artifactId>io</artifactId>
 	<version>0.1.1-SNAPSHOT</version>
@@ -37,18 +42,6 @@
 			<id>sourceforge-kerner-utils-io</id>
 			<url>sftp://frs.sourceforge.net:/home/groups/k/ke/kerner-utils-io/htdocs</url>
 		</site>
-		<repository>
-			<id>sourceforge-kerner-utils-io</id>
-			<name>SourceForge kerner-utils-io</name>
-			<url>sftp://frs.sourceforge.net:/home/pfs/project/k/ke/kerner-utils-io/releases
-			</url>
-		</repository>
-		<snapshotRepository>
-			<id>sourceforge-kerner-utils-io</id>
-			<name>SourceForge kerner-utils-io</name>
-			<url>sftp://frs.sourceforge.net:/home/pfs/project/k/ke/kerner-utils-io/snapshots
-			</url>
-		</snapshotRepository>
 	</distributionManagement>
 	<build>
 		<plugins>
