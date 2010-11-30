@@ -56,6 +56,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	protected volatile E peek = null;
 
+	/**
+	 * Puffer size to 
+	 */
+	protected volatile int peekBuffer = -1;
+
 	private volatile boolean neu = true;
 
 	/**
@@ -123,19 +128,12 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 */
 	public synchronized E next() throws IOException {
-		return next(IOUtils.DEFAULT_BUFFER);
-	}
-
-	/**
-	 * 
-	 */
-	public synchronized E next(int bufferSize) throws IOException {
 		if (hasNext()) {
 			try{
 			final E result = peek;
-			peek = doRead(bufferSize);
+			peek = doRead();
 			if(result == null)
-				return next(bufferSize);
+				return next();
 			return result;
 			}finally{
 				neu = false;
@@ -153,17 +151,5 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 *             if reading fails
 	 */
 	protected abstract E doRead() throws IOException;
-
-	/**
-	 * 
-	 * Perform the read operation, using given buffer size.
-	 * 
-	 * @return the read element of type {@code E}
-	 * @param bufferSize
-	 *            buffer size to use for reading
-	 * @throws IOException
-	 *             if reading fails
-	 */
-	protected abstract E doRead(int bufferSize) throws IOException;
 
 }
