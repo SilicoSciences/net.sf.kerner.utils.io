@@ -265,16 +265,6 @@ public class CharIterator extends AbstractBufferedReader implements
 		this.checkIndexOverflow = checkIndexOverflow;
 	}
 
-	/**
-	 * 
-	 * perform actual reading.
-	 * 
-	 * @throws IOException
-	 */
-	private synchronized void doRead() throws IOException {
-		peek = super.reader.read();
-	}
-
 	// Public //
 
 	/**
@@ -290,11 +280,11 @@ public class CharIterator extends AbstractBufferedReader implements
 	public synchronized char nextChar() throws IOException {
 		if (hasNext()) {
 			try {
-				final char result = (char) peek;
-				doRead();
+				final int result = peek;
+				peek = super.reader.read();
 				if (result == -1)
 					return nextChar();
-				return result;
+				return (char) result;
 			} finally {
 				neu = false;
 			}
