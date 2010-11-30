@@ -31,39 +31,41 @@ import net.sf.kerner.utils.io.IOUtils;
  * 
  * <p>
  * <b>Example:</b><br>
- *
+ * 
  * </p>
  * <p>
+ * 
  * <pre>
  * TODO example
  * </pre>
+ * 
  * </p>
- *
+ * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-27
- *
- * @param <E> type of elements which are iterated / read by this {@code AbstractIOIterator}
+ * 
+ * @param <E>
+ *            type of elements which are iterated / read by this
+ *            {@code AbstractIOIterator}
  */
-public abstract class AbstractIOIterator<E> extends AbstractBufferedReader implements IOIterator<E> {
-	
+public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
+		implements IOIterator<E> {
+
 	/**
 	 * Peek element.
 	 */
 	protected volatile E peek = null;
 
-	/**
-	 * Current index of this {@code AbstractIOIterator}.
-	 */
-	protected volatile long currentIndex = 0L;
-	
 	private volatile boolean neu = true;
 
 	/**
 	 * 
-	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.BufferedReader BufferedReader}.
-	 *
-	 * @param reader {@code BufferedReader} to read from
-	 *
+	 * Create a new {@code AbstractIOIterator} that reads from given
+	 * {@link java.io.BufferedReader BufferedReader}.
+	 * 
+	 * @param reader
+	 *            {@code BufferedReader} to read from
+	 * 
 	 */
 	public AbstractIOIterator(BufferedReader reader) {
 		super(reader);
@@ -72,21 +74,25 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	/**
 	 * 
 	 * Create a new {@code AbstractIOIterator} that reads from given file.
-	 *
-	 * @param file file to read from
-	 * @throws FileNotFoundException 
+	 * 
+	 * @param file
+	 *            file to read from
+	 * @throws FileNotFoundException
 	 * 
 	 */
-	public AbstractIOIterator(File file) throws FileNotFoundException  {
+	public AbstractIOIterator(File file) throws FileNotFoundException {
 		super(file);
 	}
 
 	/**
 	 * 
-	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.InputStream InputStream}.
-	 *
-	 * @param stream {@code InputStream} to read from
-	 * @throws IOException if reading fails
+	 * Create a new {@code AbstractIOIterator} that reads from given
+	 * {@link java.io.InputStream InputStream}.
+	 * 
+	 * @param stream
+	 *            {@code InputStream} to read from
+	 * @throws IOException
+	 *             if reading fails
 	 */
 	public AbstractIOIterator(InputStream stream) {
 		super(stream);
@@ -94,10 +100,13 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 
 	/**
 	 * 
-	 * Create a new {@code AbstractIOIterator} that reads from given {@link java.io.Reader Reader}.
-	 *
-	 * @param reader reader to read from
-	 * @throws IOException if reading fails
+	 * Create a new {@code AbstractIOIterator} that reads from given
+	 * {@link java.io.Reader Reader}.
+	 * 
+	 * @param reader
+	 *            reader to read from
+	 * @throws IOException
+	 *             if reading fails
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
@@ -107,55 +116,54 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * 
 	 */
 	public boolean hasNext() {
-		return peek != null || neu;
+		return (peek != null || neu);
 	}
 
-	/**
-	 * 
-	 */
-	public long nextIndex() {
-		return currentIndex + 1;
-	}
-	
 	/**
 	 * 
 	 */
 	public synchronized E next() throws IOException {
 		return next(IOUtils.DEFAULT_BUFFER);
 	}
-	
+
 	/**
 	 * 
 	 */
 	public synchronized E next(int bufferSize) throws IOException {
-		neu = false;
 		if (hasNext()) {
+			try{
 			final E result = peek;
 			peek = doRead(bufferSize);
 			if(result == null)
 				return next(bufferSize);
 			return result;
+			}finally{
+				neu = false;
+			}
 		}
 		throw new NoSuchElementException("no more elements");
 	}
-	
+
 	/**
 	 * 
 	 * Perform the read operation.
-	 *
+	 * 
 	 * @return the read element of type {@code E}
-	 * @throws IOException if reading fails
+	 * @throws IOException
+	 *             if reading fails
 	 */
 	protected abstract E doRead() throws IOException;
-	
+
 	/**
 	 * 
 	 * Perform the read operation, using given buffer size.
-	 *
+	 * 
 	 * @return the read element of type {@code E}
-	 * @param bufferSize buffer size to use for reading
-	 * @throws IOException if reading fails
+	 * @param bufferSize
+	 *            buffer size to use for reading
+	 * @throws IOException
+	 *             if reading fails
 	 */
 	protected abstract E doRead(int bufferSize) throws IOException;
-	
+
 }
