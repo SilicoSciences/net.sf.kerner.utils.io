@@ -5,8 +5,8 @@
 		<artifactId>oss-parent</artifactId>
 		<version>5</version>
 	</parent>
-	<groupId>net.sf.kerner-utils</groupId>
-	<artifactId>io</artifactId>
+	<groupId>net.sf.kerner-utils-io</groupId>
+	<artifactId>kerner-utils-io</artifactId>
 	<version>0.1.1-SNAPSHOT</version>
 	<name>Kerner-Utils-IO</name>
 	<description>Commonly used utility classes (IO related).</description>
