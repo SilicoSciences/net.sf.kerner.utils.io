@@ -65,6 +65,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
+		read();
 	}
 
 	/**
@@ -78,6 +79,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(File file) throws IOException {
 		super(file);
+		read();
 	}
 
 	/**
@@ -92,6 +94,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(InputStream stream) throws IOException {
 		super(stream);
+		read();
 	}
 
 	/**
@@ -106,10 +109,14 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
+		read();
+	}
+	
+	private void read() throws IOException{
+		peek = doRead();
 	}
 
 	/**
-	 * @throws IOException 
 	 * 
 	 */
 	public boolean hasNext() {
@@ -123,7 +130,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	public synchronized E next() throws IOException {
 		if (hasNext()) {
 			final E result = peek;
-			peek = doRead();
+			read();
 			return result;
 		}
 		throw new NoSuchElementException("no more elements");
