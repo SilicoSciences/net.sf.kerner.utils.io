@@ -40,7 +40,7 @@ import java.util.NoSuchElementException;
  * </p>
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-27
+ * @version 2010-12-01
  * 
  * @param <E>
  *            type of elements which are iterated / read by this
@@ -53,11 +53,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * Peek element.
 	 */
 	protected volatile E peek = null;
-
-	/**
-	 * Puffer size to 
-	 */
-	protected volatile int peekBuffer = -1;
 
 	private volatile boolean neu = true;
 
