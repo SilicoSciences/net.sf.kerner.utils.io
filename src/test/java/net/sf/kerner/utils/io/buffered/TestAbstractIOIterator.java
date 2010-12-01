@@ -85,6 +85,17 @@ public class TestAbstractIOIterator {
 		it.next();
 		assertFalse(it.hasNext());
 	}
+	
+	/**
+	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void testHasNext02() throws IOException {
+		in = "";
+		it = new My(new StringReader(in));
+		assertFalse(it.hasNext());
+	}
 
 	/**
 	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
