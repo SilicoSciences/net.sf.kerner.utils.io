@@ -17,6 +17,7 @@ package net.sf.kerner.utils.io.buffered;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -53,6 +54,8 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	protected volatile E peek = null;
 
+	private volatile boolean neu = true;
+
 	/**
 	 * 
 	 * Create a new {@code AbstractIOIterator} that reads from given
@@ -60,12 +63,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 * @param reader
 	 *            {@code BufferedReader} to read from
-	 * @throws IOException 
 	 * 
 	 */
-	public AbstractIOIterator(BufferedReader reader) throws IOException {
+	public AbstractIOIterator(BufferedReader reader) {
 		super(reader);
-		read();
 	}
 
 	/**
@@ -74,12 +75,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 * @param file
 	 *            file to read from
-	 * @throws IOException 
+	 * @throws FileNotFoundException
 	 * 
 	 */
-	public AbstractIOIterator(File file) throws IOException {
+	public AbstractIOIterator(File file) throws FileNotFoundException {
 		super(file);
-		read();
 	}
 
 	/**
@@ -92,9 +92,8 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * @throws IOException
 	 *             if reading fails
 	 */
-	public AbstractIOIterator(InputStream stream) throws IOException {
+	public AbstractIOIterator(InputStream stream) {
 		super(stream);
-		read();
 	}
 
 	/**
@@ -109,18 +108,13 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
-		read();
-	}
-	
-	private void read() throws IOException{
-		peek = doRead();
 	}
 
 	/**
 	 * 
 	 */
 	public boolean hasNext() {
-		return (peek != null);
+		return (peek != null || neu);
 	}
 
 	/**
@@ -128,9 +122,15 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public synchronized E next() throws IOException {
 		if (hasNext()) {
+			try{
 			final E result = peek;
-			read();
+			peek = doRead();
+			if(result == null)
+				return next();
 			return result;
+			}finally{
+				neu = false;
+			}
 		}
 		throw new NoSuchElementException("no more elements");
 	}

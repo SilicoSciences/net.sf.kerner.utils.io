@@ -32,11 +32,10 @@ public class TestAbstractIOIterator {
 	
 	private static class My extends AbstractIOIterator<String> {
 		
-		protected final BufferedStringReader reader2;
-		
+		protected final BufferedStringReader reader2 = new BufferedStringReader(super.reader);
+
 		public My(Reader reader) throws IOException {
 			super(reader);
-			reader2 = new BufferedStringReader(super.reader);
 		}
 
 		@Override
