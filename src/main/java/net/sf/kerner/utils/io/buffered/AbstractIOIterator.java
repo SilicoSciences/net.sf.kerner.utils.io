@@ -38,8 +38,15 @@ import java.util.NoSuchElementException;
  * 
  * </p>
  * 
+ * <p>
+ * TODO: <b>Attention:</b> In order to use this class properly, call
+ * {@link AbstractIOIterator#read()} in all constructors of extending class!
+ * <br>
+ * This is clearly a design issue, that will be solved soon.
+ * </p>
+ * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-12-01
+ * @version 2010-12-02
  * 
  * @param <E>
  *            type of elements which are iterated / read by this
@@ -60,12 +67,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 * @param reader
 	 *            {@code BufferedReader} to read from
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public AbstractIOIterator(BufferedReader reader) throws IOException {
 		super(reader);
-		read();
 	}
 
 	/**
@@ -74,12 +80,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 * @param file
 	 *            file to read from
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public AbstractIOIterator(File file) throws IOException {
 		super(file);
-		read();
 	}
 
 	/**
@@ -94,7 +99,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(InputStream stream) throws IOException {
 		super(stream);
-		read();
 	}
 
 	/**
@@ -109,10 +113,9 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
-		read();
 	}
-	
-	private void read() throws IOException{
+
+	protected void read() throws IOException {
 		peek = doRead();
 	}
 
@@ -120,7 +123,6 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 */
 	public boolean hasNext() {
-		
 		return (peek != null);
 	}
 
