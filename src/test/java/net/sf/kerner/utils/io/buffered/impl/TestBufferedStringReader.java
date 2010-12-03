@@ -14,8 +14,8 @@ limitations under the License.
  ***********************************************************************/
 package net.sf.kerner.utils.io.buffered.impl;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
