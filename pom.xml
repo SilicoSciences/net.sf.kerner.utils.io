@@ -161,12 +161,14 @@
 							<instrumentation>
 								<ignores>
 									<ignore>*.*Exception.class</ignore>
+									<ignore>net.sf.kerner.utils.io.IOUtils*</ignore>
 									<ignore>net.sf.kerner.utils.io.AbstractGenericReader*</ignore>
 									<ignore>net.sf.kerner.utils.io.buffered.AbstractBufferedReader*</ignore>
 									<ignore>net.sf.kerner.utils.io.buffered.AbstractBufferedWriter*</ignore>
 								</ignores>
 								<excludes>
 									<exclude>*Exception.class</exclude>
+									<exclude>net/sf/kerner/utils/io/IOUtils*</exclude>
 									<exclude>net/sf/kerner/utils/io/AbstractGenericReader*</exclude>
 									<exclude>net/sf/kerner/utils/io/buffered/AbstractBufferedReader*</exclude>
 									<exclude>net/sf/kerner/utils/io/buffered/AbstractBufferedWriter*</exclude>
