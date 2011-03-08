@@ -173,8 +173,9 @@ public abstract class AbstractDirectoryWalker {
 	 * @param min
 	 *            starting depth at which actual action performing is started.
 	 */
-	public void setMinDepth(Long min) {
+	public AbstractDirectoryWalker setMinDepth(Long min) {
 		minDepth = min;
+		return this;
 	}
 
 	/**
@@ -182,8 +183,9 @@ public abstract class AbstractDirectoryWalker {
 	 * @param max
 	 *            ending depth at which actual action performing is stopped.
 	 */
-	public void setMaxDepth(Long max) {
+	public AbstractDirectoryWalker setMaxDepth(Long max) {
 		maxDepth = max;
+		return this;
 	}
 
 	/**
@@ -192,8 +194,9 @@ public abstract class AbstractDirectoryWalker {
 	 *            <code>FileFilter</code> to be added to this DirectoryWalkers
 	 *            FilterSet.
 	 */
-	public synchronized void addFilter(FileFilter filter) {
+	public synchronized AbstractDirectoryWalker addFilter(FileFilter filter) {
 		fileFilters.add(filter);
+		return this;
 	}
 
 	public void handleSpecialFile(File file) throws IOException {
