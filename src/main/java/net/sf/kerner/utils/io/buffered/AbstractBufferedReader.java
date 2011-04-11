@@ -67,6 +67,7 @@ public abstract class AbstractBufferedReader {
 	 * @param reader
 	 *            reader from which is read
 	 * @see java.io.Reader
+	 * 
 	 */
 	public AbstractBufferedReader(Reader reader) {
 		synchronized (AbstractBufferedReader.class) {
@@ -82,7 +83,7 @@ public abstract class AbstractBufferedReader {
 	 * <p>
 	 * <b>Note:</b> Passed in {@code java.io.BufferedReader} is kept as a
 	 * reference. Use this constructor if you want to work on same
-	 * {@link java.io.BufferedReader} which more than one reading-proxies.
+	 * {@link java.io.BufferedReader} with more than one reading-proxies.
 	 * </p>
 	 * 
 	 * @param reader
