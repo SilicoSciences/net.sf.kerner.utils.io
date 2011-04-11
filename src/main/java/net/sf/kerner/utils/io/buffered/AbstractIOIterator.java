@@ -64,6 +64,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 * Create a new {@code AbstractIOIterator} that reads from given
 	 * {@link java.io.BufferedReader BufferedReader}.
+	 * <p>
+	 * <b>Note:</b> Passed in {@code java.io.BufferedReader} is kept as a
+	 * reference. Use this constructor if you want to work on same
+	 * {@link java.io.BufferedReader} which more than one reading-proxies.
+	 * </p>
 	 * 
 	 * @param reader
 	 *            {@code BufferedReader} to read from
