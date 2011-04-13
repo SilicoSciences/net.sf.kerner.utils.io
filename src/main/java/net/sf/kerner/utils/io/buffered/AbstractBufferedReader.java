@@ -52,7 +52,7 @@ public abstract class AbstractBufferedReader {
 	 * @see java.io.File
 	 */
 	public AbstractBufferedReader(File file) throws FileNotFoundException {
-		synchronized (reader) {
+		synchronized (AbstractBufferedReader.class) {
 			this.reader = new BufferedReader(
 					IOUtils.inputStreamToReader(new FileInputStream(file)));
 		}
@@ -70,7 +70,7 @@ public abstract class AbstractBufferedReader {
 	 * 
 	 */
 	public AbstractBufferedReader(Reader reader) {
-		synchronized (reader) {
+		synchronized (AbstractBufferedReader.class) {
 			this.reader = new BufferedReader(reader);
 		}
 	}
@@ -91,7 +91,7 @@ public abstract class AbstractBufferedReader {
 	 * @see java.io.BufferedReader
 	 */
 	public AbstractBufferedReader(BufferedReader reader) {
-		synchronized (reader) {
+		synchronized (AbstractBufferedReader.class) {
 			this.reader = reader;
 		}
 	}
@@ -107,7 +107,7 @@ public abstract class AbstractBufferedReader {
 	 * @see java.io.InputStream
 	 */
 	public AbstractBufferedReader(InputStream stream) {
-		synchronized (reader) {
+		synchronized (AbstractBufferedReader.class) {
 			this.reader = new BufferedReader(
 					IOUtils.inputStreamToReader(stream));
 		}
