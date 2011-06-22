@@ -35,6 +35,9 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
 
+import net.sf.kerner.utils.StringUtils;
+import net.sf.kerner.utils.Utils;
+
 /**
  * <p>
  * Utility class for commonly used Input/ Output operations.
@@ -56,8 +59,7 @@ public class IOUtils {
 	/**
 	 * 
 	 */
-	public final static String NEW_LINE_STRING = System
-			.getProperty("line.separator");
+	public final static String NEW_LINE_STRING = StringUtils.NEW_LINE_STRING;
 
 	/**
 	 * 
