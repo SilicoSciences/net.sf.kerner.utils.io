@@ -25,8 +25,7 @@ public class FileUtils {
 			if (dir.exists())
 				return (dir.canRead() && dir.isDirectory() && dir.length() != 0);
 			else {
-				final boolean b = dir.mkdirs();
-				return b;
+				return dir.mkdirs();
 			}
 		} else {
 			return (dir.exists() && dir.canRead() && dir.isDirectory() && dir
