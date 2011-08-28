@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2009-2010 Alexander Kerner. All rights reserved.
+Copyright (c) 2009-2011 Alexander Kerner. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,7 +37,6 @@ import java.io.Serializable;
 import java.io.Writer;
 
 import net.sf.kerner.utils.StringUtils;
-import net.sf.kerner.utils.Utils;
 
 /**
  * <p>
@@ -44,7 +44,7 @@ import net.sf.kerner.utils.Utils;
  * </p>
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-11-19
+ * @version 2011-08-28
  * 
  */
 public class IOUtils {
@@ -76,6 +76,16 @@ public class IOUtils {
 	 */
 	private IOUtils() {
 
+	}
+
+	public static long InputStreamToFile(InputStream stream, File file)
+			throws IOException {
+		final FileWriter w = new FileWriter(file);
+		final InputStreamReader r = new InputStreamReader(stream);
+		final long result = readerToWriter(new InputStreamReader(stream), w);
+		closeProperly(w);
+		closeProperly(r);
+		return result;
 	}
 
 	/**
