@@ -11,8 +11,7 @@ public class FileUtils {
 	 * Extended accessibility test, if a directory is available for reading. <br>
 	 * it consists of following tests:
 	 * <p>
-	 * {@code dir.exists() && dir.canRead() && dir.isDirectory() && dir.length()
-	 * != 0}
+	 * {@code dir.exists() && dir.canRead() && dir.isDirectory()
 	 * <p>
 	 * 
 	 * @param dir
@@ -24,7 +23,7 @@ public class FileUtils {
 	public static boolean dirCheck(File dir, boolean createIfAbsend) {
 		if (createIfAbsend) {
 			if (dir.exists())
-				return (dir.canRead() && dir.isDirectory() && dir.length() != 0);
+				return (dir.canRead() && dir.isDirectory());
 			else {
 				return dir.mkdirs();
 			}
