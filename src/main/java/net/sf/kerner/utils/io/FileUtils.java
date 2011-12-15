@@ -28,8 +28,7 @@ public class FileUtils {
 				return dir.mkdirs();
 			}
 		} else {
-			return (dir.exists() && dir.canRead() && dir.isDirectory() && dir
-					.length() != 0);
+			return (dir.exists() && dir.canRead() && dir.isDirectory());
 		}
 	}
 	
