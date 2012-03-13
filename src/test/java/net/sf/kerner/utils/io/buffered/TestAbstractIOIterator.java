@@ -23,7 +23,7 @@ import org.junit.Test;
 /**
  *
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-12-02
+ * @version 2012-03-13
  *
  */
 public class TestAbstractIOIterator {
@@ -34,7 +34,6 @@ public class TestAbstractIOIterator {
 		
 		public My(Reader reader) throws IOException {
 			super(reader);
-			super.read();
 		}
 
 		@Override
@@ -69,9 +68,10 @@ public class TestAbstractIOIterator {
 
 	/**
 	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+	 * @throws IOException 
 	 */
 	@Test
-	public final void testHasNext() {
+	public final void testHasNext() throws IOException {
 		assertTrue(it.hasNext());
 	}
 	

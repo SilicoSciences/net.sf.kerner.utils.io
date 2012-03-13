@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2009-2010 Alexander Kerner. All rights reserved.
+Copyright (c) 2009-2012 Alexander Kerner. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -38,15 +38,8 @@ import java.util.NoSuchElementException;
  * 
  * </p>
  * 
- * <p>
- * TODO: <b>Attention:</b> In order to use this class properly, call
- * {@link AbstractIOIterator#read()} in all constructors of extending class!
- * <br>
- * This is clearly a design issue, that will be solved soon.
- * </p>
- * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-12-02
+ * @version 2012-03-13
  * 
  * @param <E>
  *            type of elements which are iterated / read by this
@@ -119,15 +112,13 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
 	}
-
-	protected void read() throws IOException {
+	
+	private void peek() throws IOException {
 		peek = doRead();
 	}
 
-	/**
-	 * 
-	 */
-	public boolean hasNext() {
+	public boolean hasNext() throws IOException {
+		peek();
 		return (peek != null);
 	}
 
@@ -136,9 +127,7 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 */
 	public synchronized E next() throws IOException {
 		if (hasNext()) {
-			final E result = peek;
-			read();
-			return result;
+			return peek;
 		}
 		throw new NoSuchElementException("no more elements");
 	}
