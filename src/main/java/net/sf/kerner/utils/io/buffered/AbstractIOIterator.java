@@ -45,13 +45,14 @@ import java.util.NoSuchElementException;
  *            type of elements which are iterated / read by this
  *            {@code AbstractIOIterator}
  */
-public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
-		implements IOIterator<E> {
+public abstract class AbstractIOIterator<E> extends AbstractBufferedReader implements IOIterator<E> {
 
 	/**
 	 * Peek element.
 	 */
 	protected volatile E peek = null;
+
+	protected volatile boolean needToPeek = true;
 
 	/**
 	 * 
@@ -112,13 +113,16 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	public AbstractIOIterator(Reader reader) throws IOException {
 		super(reader);
 	}
-	
-	private void peek() throws IOException {
+
+	private synchronized void peek() throws IOException {
 		peek = doRead();
+		needToPeek = false;
 	}
 
-	public boolean hasNext() throws IOException {
-		peek();
+	public synchronized boolean hasNext() throws IOException {
+		if (needToPeek) {
+			peek();
+		}
 		return (peek != null);
 	}
 
@@ -126,10 +130,10 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader
 	 * 
 	 */
 	public synchronized E next() throws IOException {
-		if (hasNext()) {
-			return peek;
-		}
-		throw new NoSuchElementException("no more elements");
+		if (peek == null)
+			throw new NoSuchElementException("no more elements");
+		needToPeek = true;
+		return peek;
 	}
 
 	/**
