@@ -130,10 +130,11 @@ public abstract class AbstractIOIterator<E> extends AbstractBufferedReader imple
 	 * 
 	 */
 	public synchronized E next() throws IOException {
-		if (peek == null)
-			throw new NoSuchElementException("no more elements");
-		needToPeek = true;
-		return peek;
+		if (hasNext()) {
+			needToPeek = true;
+			return peek;
+		}
+		throw new NoSuchElementException("no more elements");
 	}
 
 	/**
