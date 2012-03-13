@@ -115,5 +115,14 @@ public class TestAbstractIOIterator {
 		it.next();
 		it.next();
 	}
+	
+	@Test
+	public final void testhasNext01() throws IOException {
+		for(int i = 0; i< 100; i++){
+			assertTrue(it.hasNext());
+		}
+		it.next();
+		assertFalse(it.hasNext());
+	}
 
 }
