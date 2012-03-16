@@ -37,6 +37,8 @@ import java.io.Serializable;
 import java.io.Writer;
 
 import net.sf.kerner.utils.StringUtils;
+import net.sf.kerner.utils.io.buffered.IOIterator;
+import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 
 /**
  * <p>
@@ -60,6 +62,11 @@ public class IOUtils {
 	 * 
 	 */
 	public final static String NEW_LINE_STRING = StringUtils.NEW_LINE_STRING;
+	
+	/**
+	 * 
+	 */
+	public final static char NEW_LINE_CHAR = NEW_LINE_STRING.charAt(0);
 
 	/**
 	 * 
@@ -78,8 +85,7 @@ public class IOUtils {
 
 	}
 
-	public static long InputStreamToFile(InputStream stream, File file)
-			throws IOException {
+	public static long InputStreamToFile(InputStream stream, File file) throws IOException {
 		final FileWriter w = new FileWriter(file);
 		final InputStreamReader r = new InputStreamReader(stream);
 		final long result = readerToWriter(new InputStreamReader(stream), w);
@@ -97,8 +103,7 @@ public class IOUtils {
 	 * @return the <code>InputStream</code>.
 	 * @throws IOException
 	 */
-	public static InputStream getInputStreamFromFile(File file)
-			throws IOException {
+	public static InputStream getInputStreamFromFile(File file) throws IOException {
 		return new FileInputStream(file);
 	}
 
@@ -111,8 +116,7 @@ public class IOUtils {
 	 * @return the <code>OutputStream</code>.
 	 * @throws IOException
 	 */
-	public static OutputStream getOutputStreamForFile(File file)
-			throws FileNotFoundException {
+	public static OutputStream getOutputStreamForFile(File file) throws FileNotFoundException {
 		return new FileOutputStream(file);
 	}
 
@@ -125,8 +129,7 @@ public class IOUtils {
 	 * @return the <code>BufferedInputStream</code>.
 	 * @throws IOException
 	 */
-	public static BufferedInputStream getBufferedInputStreamFromFile(File file)
-			throws IOException {
+	public static BufferedInputStream getBufferedInputStreamFromFile(File file) throws IOException {
 		return new BufferedInputStream(new FileInputStream(file));
 	}
 
@@ -148,8 +151,7 @@ public class IOUtils {
 	 * @throws IOException
 	 *             if anything goes wrong
 	 */
-	public static void objectToStream(Serializable s, OutputStream stream)
-			throws IOException {
+	public static void objectToStream(Serializable s, OutputStream stream) throws IOException {
 		if (s == null || stream == null)
 			throw new NullPointerException();
 		ObjectOutputStream outStream = null;
@@ -181,8 +183,7 @@ public class IOUtils {
 	 * @throws IOException
 	 *             if anything goes wrong
 	 */
-	public static void objectToFile(Serializable s, File file)
-			throws IOException {
+	public static void objectToFile(Serializable s, File file) throws IOException {
 		if (s == null || file == null)
 			throw new NullPointerException();
 		objectToStream(s, new FileOutputStream(file));
@@ -215,8 +216,7 @@ public class IOUtils {
 	 * @return number of bytes read/ written.
 	 * @throws IOException
 	 */
-	public static long readerToWriter(Reader reader, Writer writer)
-			throws IOException {
+	public static long readerToWriter(Reader reader, Writer writer) throws IOException {
 		return readerToWriter(reader, writer, 0);
 	}
 
@@ -234,8 +234,8 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long readerToWriter(final Reader reader, final Writer writer,
-			int buffer) throws IOException {
+	public static long readerToWriter(final Reader reader, final Writer writer, int buffer)
+			throws IOException {
 		if (buffer < 1)
 			buffer = DEFAULT_BUFFER;
 		final char[] charBuffer = new char[buffer];
@@ -263,8 +263,8 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long inputStreamToOutputStream(final InputStream in,
-			final OutputStream out, int buffer) throws IOException {
+	public static long inputStreamToOutputStream(final InputStream in, final OutputStream out,
+			int buffer) throws IOException {
 		if (buffer < 1)
 			buffer = DEFAULT_BUFFER;
 		final byte[] byteBuffer = new byte[buffer];
@@ -290,8 +290,7 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long inputStreamToWriter(InputStream in, Writer out)
-			throws IOException {
+	public static long inputStreamToWriter(InputStream in, Writer out) throws IOException {
 		InputStreamReader inr = new InputStreamReader(in);
 		return readerToWriter(inr, out);
 	}
@@ -310,8 +309,8 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long inputStreamToWriter(final InputStream in,
-			final Writer out, final int buffer) throws IOException {
+	public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer)
+			throws IOException {
 		InputStreamReader inr = new InputStreamReader(in);
 		return readerToWriter(inr, out, buffer);
 	}
@@ -328,8 +327,8 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long inputStreamToOutputStream(InputStream in,
-			OutputStream out) throws IOException {
+	public static long inputStreamToOutputStream(InputStream in, OutputStream out)
+			throws IOException {
 		return inputStreamToOutputStream(in, out, DEFAULT_BUFFER);
 	}
 
@@ -345,8 +344,7 @@ public class IOUtils {
 	 * @return number of bytes read/written.
 	 * @throws IOException
 	 */
-	public static long outputStreamToReader(OutputStream out, Reader reader)
-			throws IOException {
+	public static long outputStreamToReader(OutputStream out, Reader reader) throws IOException {
 		OutputStreamWriter outw = new OutputStreamWriter(out);
 		return readerToWriter(reader, outw);
 	}
@@ -379,8 +377,8 @@ public class IOUtils {
 		return new InputStreamReader(in);
 	}
 
-	public static <V> V deepCopy(Class<V> c, Serializable s)
-			throws IOException, ClassNotFoundException {
+	public static <V> V deepCopy(Class<V> c, Serializable s) throws IOException,
+			ClassNotFoundException {
 		if (c == null || s == null)
 			throw new NullPointerException();
 		ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -402,4 +400,26 @@ public class IOUtils {
 
 	}
 
+	public static long getOccource(char c, Reader reader) throws IOException {
+		final BufferedStringReader r = new BufferedStringReader(reader);
+		long result = 0;
+		char[] line;
+		while((line = r.nextChars()) != null) {
+			for (char l : line) {
+				if (l == c) {
+					result++;
+				}
+			}
+		};
+		r.close();
+		return result;
+	}
+
+	public static long getOccource(char c, InputStream stream) throws IOException {
+		return getOccource(c, IOUtils.inputStreamToReader(stream));
+	}
+	
+	public static long getOccource(char c, File file) throws IOException {
+		return getOccource(c, new FileInputStream(file));
+	}
 }
