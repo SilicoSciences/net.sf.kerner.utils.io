@@ -24,8 +24,8 @@ import java.util.NoSuchElementException;
 
 import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedReader;
-import net.sf.kerner.utils.io.buffered.IOIterator;
 import net.sf.kerner.utils.io.buffered.GeneralIOIterator;
+import net.sf.kerner.utils.io.buffered.IOIterator;
 import net.sf.kerner.utils.math.ArithmeticSavety;
 
 /**
