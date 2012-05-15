@@ -37,7 +37,6 @@ import java.io.Serializable;
 import java.io.Writer;
 
 import net.sf.kerner.utils.StringUtils;
-import net.sf.kerner.utils.io.buffered.IOIterator;
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 
 /**
