@@ -7,11 +7,11 @@ import java.io.Reader;
 import java.util.Collection;
 
 public interface GenericCollectionReader<T> {
-	
-	public Collection<T> readAll(File file) throws IOException;
-	
-	public Collection<T> readAll(Reader reader) throws IOException;
-	
-	public Collection<T> readAll(InputStream stream) throws IOException;
+
+    public Collection<T> readAll(File file) throws IOException;
+
+    public Collection<T> readAll(Reader reader) throws IOException;
+
+    public Collection<T> readAll(InputStream stream) throws IOException;
 
 }

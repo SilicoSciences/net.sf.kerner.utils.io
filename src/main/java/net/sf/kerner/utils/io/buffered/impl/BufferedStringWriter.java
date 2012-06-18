@@ -26,20 +26,16 @@ import net.sf.kerner.utils.io.buffered.AbstractBufferedWriter;
 import net.sf.kerner.utils.io.buffered.CharWriter;
 
 /**
- * A {@code BufferedStringWriter} provides the ability to write a string
- * buffered to
+ * A {@code BufferedStringWriter} provides the ability to write a string buffered to
  * <ul>
- * <li>
- * a {@link java.io.File}</li>
- * <li>
- * a {@link java.io.Writer}</li>
- * <li>
- * an {@link java.io.OutputStream}</li>
+ * <li>a {@link java.io.File}</li>
+ * <li>a {@link java.io.Writer}</li>
+ * <li>an {@link java.io.OutputStream}</li>
  * </ul>
  * </p>
  * <p>
- * <b>Note:</b> writing is buffered. If you want to write quickly small files at
- * once, consider to use {@link net.sf.kerner.utils.io.lazy.LazyStringWriter LazyStringWriter} instead.
+ * <b>Note:</b> writing is buffered. If you want to write quickly small files at once, consider to use
+ * {@link net.sf.kerner.utils.io.lazy.LazyStringWriter LazyStringWriter} instead.
  * </p>
  * <p>
  * <b>Example:</b>
@@ -49,23 +45,23 @@ import net.sf.kerner.utils.io.buffered.CharWriter;
  * &#064;Test
  * public final void exampleWriteStringToAWriter() throws IOException {
  * 
- * 	// Use BufferedStringWriter to write a string buffered to a java.io.Writer
+ *     // Use BufferedStringWriter to write a string buffered to a java.io.Writer
  * 
- * 	StringWriter sw = new StringWriter();
- * 	final BufferedStringWriter writer = new BufferedStringWriter(sw);
+ *     StringWriter sw = new StringWriter();
+ *     final BufferedStringWriter writer = new BufferedStringWriter(sw);
  * 
- * 	// write first two characters
- * 	writer.write(&quot;ab&quot;);
+ *     // write first two characters
+ *     writer.write(&quot;ab&quot;);
  * 
- * 	// flush the writer (it's buffer)
- * 	writer.flush();
+ *     // flush the writer (it's buffer)
+ *     writer.flush();
  * 
- * 	assertEquals(&quot;ab&quot;, sw.toString());
- * 	writer.write(&quot;cd&quot;);
+ *     assertEquals(&quot;ab&quot;, sw.toString());
+ *     writer.write(&quot;cd&quot;);
  * 
- * 	// closing the writer will automatically flush it's buffer
- * 	writer.close();
- * 	assertEquals(&quot;abcd&quot;, sw.toString());
+ *     // closing the writer will automatically flush it's buffer
+ *     writer.close();
+ *     assertEquals(&quot;abcd&quot;, sw.toString());
  * }
  * </pre>
  * 
@@ -73,24 +69,24 @@ import net.sf.kerner.utils.io.buffered.CharWriter;
  * &#064;Test
  * public final void exampleWriteStringToAFile() throws IOException {
  * 
- * 	// Use BufferedStringWriter to write a string buffered to a file
+ *     // Use BufferedStringWriter to write a string buffered to a file
  * 
- * 	final File file = new File(&quot;src/test/resources/smallTestFileWrite.txt&quot;);
+ *     final File file = new File(&quot;src/test/resources/smallTestFileWrite.txt&quot;);
  * 
- * 	final BufferedStringWriter writer = new BufferedStringWriter(file);
+ *     final BufferedStringWriter writer = new BufferedStringWriter(file);
  * 
- * 	// write first two characters
- * 	writer.write(&quot;ab&quot;);
+ *     // write first two characters
+ *     writer.write(&quot;ab&quot;);
  * 
- * 	// flush the writer (it's buffer)
- * 	writer.flush();
+ *     // flush the writer (it's buffer)
+ *     writer.flush();
  * 
- * 	assertEquals(&quot;ab&quot;, new LazyStringReader().read(file));
- * 	writer.write(&quot;cd&quot;);
+ *     assertEquals(&quot;ab&quot;, new LazyStringReader().read(file));
+ *     writer.write(&quot;cd&quot;);
  * 
- * 	// closing the writer will automatically flush it's buffer
- * 	writer.close();
- * 	assertEquals(&quot;abcd&quot;, new LazyStringReader().read(file));
+ *     // closing the writer will automatically flush it's buffer
+ *     writer.close();
+ *     assertEquals(&quot;abcd&quot;, new LazyStringReader().read(file));
  * }
  * </pre>
  * 
@@ -99,116 +95,103 @@ import net.sf.kerner.utils.io.buffered.CharWriter;
  * @see java.io.File
  * @see java.io.Writer
  * @see java.io.OutputStream
- * 
  */
-public class BufferedStringWriter extends AbstractBufferedWriter implements CharWriter,
-		LineWriter, ObjectWriter<String> {
+public class BufferedStringWriter extends AbstractBufferedWriter implements CharWriter, LineWriter,
+        ObjectWriter<String> {
 
-	// Constructor //
+    // Constructor //
 
-	/**
-	 * 
-	 * <p>
-	 * Construct a new {@code BufferedStringWriter} that will write a String to
-	 * a file.
-	 * </p>
-	 * 
-	 * 
-	 * @param file
-	 *            file to which is written
-	 * @throws IOException
-	 *             if {@code file} is not accessible
-	 */
-	public BufferedStringWriter(File file) throws IOException {
-			super(file);
-	}
+    /**
+     * <p>
+     * Construct a new {@code BufferedStringWriter} that will write a String to a file.
+     * </p>
+     * 
+     * @param file
+     *            file to which is written
+     * @throws IOException
+     *             if {@code file} is not accessible
+     */
+    public BufferedStringWriter(File file) throws IOException {
+        super(file);
+    }
 
-	/**
-	 * 
-	 * <p>
-	 * Construct a new {@code BufferedStringWriter} that will write a String to
-	 * a {@link java.io.Writer Writer}.
-	 * </p>
-	 * 
-	 * 
-	 * @param writer
-	 *            writer to which is written
-	 */
-	public BufferedStringWriter(Writer writer) {
-		super(writer);
-	}
+    /**
+     * <p>
+     * Construct a new {@code BufferedStringWriter} that will write a String to a {@link java.io.Writer Writer}.
+     * </p>
+     * 
+     * @param writer
+     *            writer to which is written
+     */
+    public BufferedStringWriter(Writer writer) {
+        super(writer);
+    }
 
-	/**
-	 * 
-	 * <p>
-	 * Construct a new {@code BufferedStringWriter} that will write a String to
-	 * a {@link java.io.OutputStream OutputStream}.
-	 * </p>
-	 * 
-	 * 
-	 * @param stream
-	 *            stream to which is written
-	 * @throws IOException 
-	 */
-	public BufferedStringWriter(OutputStream stream) {
-		super(stream);
-	}
+    /**
+     * <p>
+     * Construct a new {@code BufferedStringWriter} that will write a String to a {@link java.io.OutputStream
+     * OutputStream}.
+     * </p>
+     * 
+     * @param stream
+     *            stream to which is written
+     * @throws IOException
+     */
+    public BufferedStringWriter(OutputStream stream) {
+        super(stream);
+    }
 
-	// Public //
-	
-	/**
-	 * 
-	 * 
-	 * Write the next string.
-	 * 
-	 *
-	 * @param string string that is written
-	 * @throws IOException if anything goes wrong
-	 */
-	public synchronized void write(String string) throws IOException {
-		writer.write(string);
-	}
+    // Public //
 
-	// Implement //
+    /**
+     * Write the next string.
+     * 
+     * @param string
+     *            string that is written
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public synchronized void write(String string) throws IOException {
+        writer.write(string);
+    }
 
-	/**
-	 * 
-	 * 
-	 * Write the next string and append a {@link IOUtils#NEW_LINE_STRING}.
-	 * 
-	 *
-	 * @param line line that is written
-	 * @throws IOException if anything goes wrong
-	 */
-	public synchronized void writeNextLine(String line) throws IOException {
-		writer.write(line);
-		writer.write(IOUtils.NEW_LINE_STRING);
-	}
+    // Implement //
 
-	/**
-	 * 
-	 * 
-	 * Write a single character.
-	 * 
-	 *
-	 * @param c character that is written
-	 * @throws IOException if anything goes wrong
-	 */
-	public synchronized void write(char c) throws IOException {
-		writer.write(c);
-	}
+    /**
+     * Write the next string and append a {@link IOUtils#NEW_LINE_STRING}.
+     * 
+     * @param line
+     *            line that is written
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public synchronized void writeNextLine(String line) throws IOException {
+        writer.write(line);
+        writer.write(IOUtils.NEW_LINE_STRING);
+    }
 
-	/**
-	 * 
-	 * 
-	 * Write a an array of characters.
-	 * 
-	 *
-	 * @param chars array of characters that is written
-	 * @throws IOException if anything goes wrong
-	 */
-	public synchronized void write(char[] chars) throws IOException {
-		writer.write(chars);
-	}
+    /**
+     * Write a single character.
+     * 
+     * @param c
+     *            character that is written
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public synchronized void write(char c) throws IOException {
+        writer.write(c);
+    }
+
+    /**
+     * Write a an array of characters.
+     * 
+     * @param chars
+     *            array of characters that is written
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public synchronized void write(char[] chars) throws IOException {
+        writer.write(chars);
+    }
 
 }

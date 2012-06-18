@@ -7,19 +7,19 @@ import java.io.InputStream;
 import java.util.Collection;
 
 public abstract class AbstractGenericCollectionReader<T> implements GenericCollectionReader<T> {
-	
-	/**
-	 * 
-	 */
-	public Collection<T> readAll(File file) throws IOException {
-		return readAll(new FileInputStream(file));
-	}
 
-	/**
+    /**
 	 * 
 	 */
-	public Collection<T> readAll(InputStream stream) throws IOException {
-		return readAll(IOUtils.inputStreamToReader(stream));
-	}
+    public Collection<T> readAll(File file) throws IOException {
+        return readAll(new FileInputStream(file));
+    }
+
+    /**
+	 * 
+	 */
+    public Collection<T> readAll(InputStream stream) throws IOException {
+        return readAll(IOUtils.inputStreamToReader(stream));
+    }
 
 }

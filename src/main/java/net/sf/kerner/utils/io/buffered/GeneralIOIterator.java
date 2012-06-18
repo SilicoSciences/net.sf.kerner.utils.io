@@ -19,8 +19,8 @@ import java.io.IOException;
 
 public interface GeneralIOIterator {
 
-	boolean hasNext() throws IOException;
-	
-	void close();
+    boolean hasNext() throws IOException;
+
+    void close();
 
 }

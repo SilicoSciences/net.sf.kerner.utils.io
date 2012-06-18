@@ -24,12 +24,9 @@ import java.io.Writer;
  * <p>
  * A {@code GenericWriter} provides the ability to write something to
  * <ul>
- * <li>
- * a {@link java.io.File File}</li>
- * <li>
- * a {@link java.io.Writer Writer}</li>
- * <li>
- * an {@link java.io.OutputStream OutputStream}</li>
+ * <li>a {@link java.io.File File}</li>
+ * <li>a {@link java.io.Writer Writer}</li>
+ * <li>an {@link java.io.OutputStream OutputStream}</li>
  * </ul>
  * </p>
  * <p>
@@ -41,45 +38,40 @@ import java.io.Writer;
  * @see java.io.File File
  * @see java.io.Writer Writer
  * @see java.io.OutputStream OutputStream
- * 
  */
 public interface GenericWriter {
 
-	/**
-	 * 
-	 * <p>
-	 * Write something to a {@link java.io.File File}.
-	 * </p>
-	 * 
-	 * @param file
-	 *            file to which is written
-	 * @throws IOException
-	 */
-	void write(File file) throws IOException;
+    /**
+     * <p>
+     * Write something to a {@link java.io.File File}.
+     * </p>
+     * 
+     * @param file
+     *            file to which is written
+     * @throws IOException
+     */
+    void write(File file) throws IOException;
 
-	/**
-	 * 
-	 * <p>
-	 * Write something to a {@link java.io.Writer Writer}.
-	 * </p>
-	 * 
-	 * @param writer
-	 *            writer to which is written
-	 * @throws IOException
-	 */
-	void write(Writer writer) throws IOException;
+    /**
+     * <p>
+     * Write something to a {@link java.io.Writer Writer}.
+     * </p>
+     * 
+     * @param writer
+     *            writer to which is written
+     * @throws IOException
+     */
+    void write(Writer writer) throws IOException;
 
-	/**
-	 * 
-	 * <p>
-	 * Write something to an {@link java.io.OutputStream OutputStream}.
-	 * </p>
-	 * 
-	 * 
-	 * @param stream
-	 *            stream to which is written
-	 * @throws IOException
-	 */
-	void write(OutputStream stream) throws IOException;
+    /**
+     * <p>
+     * Write something to an {@link java.io.OutputStream OutputStream}.
+     * </p>
+     * 
+     * @param stream
+     *            stream to which is written
+     * @throws IOException
+     */
+    void write(OutputStream stream) throws IOException;
 
 }

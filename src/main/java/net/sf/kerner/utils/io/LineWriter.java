@@ -18,12 +18,9 @@ package net.sf.kerner.utils.io;
 import java.io.IOException;
 
 /**
- * 
  * A {@code LineWriter} writes a string line by line.
- * 
  * <p>
  * <b>Example:</b><br>
- * 
  * </p>
  * <p>
  * 
@@ -35,17 +32,17 @@ import java.io.IOException;
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-27
- * 
  */
 public interface LineWriter {
 
-	/**
-	 * 
-	 * Write a string and append {@link IOUtils#NEW_LINE_STRING}.
-	 *
-	 * @param line string to write
-	 * @throws IOException if writing fails
-	 */
-	void writeNextLine(String line) throws IOException;
+    /**
+     * Write a string and append {@link IOUtils#NEW_LINE_STRING}.
+     * 
+     * @param line
+     *            string to write
+     * @throws IOException
+     *             if writing fails
+     */
+    void writeNextLine(String line) throws IOException;
 
 }

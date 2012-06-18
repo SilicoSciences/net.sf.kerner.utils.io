@@ -21,108 +21,111 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2012-03-13
- *
  */
 public class TestAbstractIOIterator {
-	
-	private static class My extends AbstractIOIterator<String> {
-		
-		protected final BufferedStringReader reader2 = new BufferedStringReader(super.reader);
-		
-		public My(Reader reader) throws IOException {
-			super(reader);
-		}
 
-		@Override
-		protected String doRead() throws IOException {
-			String s = reader2.nextString();
-			return s;
-		}
-	}
-	
-	private String in;
-	private AbstractIOIterator<String> it;
+    private static class My extends AbstractIOIterator<String> {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+        protected final BufferedStringReader reader2 = new BufferedStringReader(super.reader);
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+        public My(Reader reader) throws IOException {
+            super(reader);
+        }
 
-	@Before
-	public void setUp() throws Exception {
-		in = "input001";
-		it = new My(new StringReader(in));
-	}
+        @Override
+        protected String doRead() throws IOException {
+            String s = reader2.nextString();
+            return s;
+        }
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		it = null;
-		in = null;
-	}
+    private String in;
+    private AbstractIOIterator<String> it;
 
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testHasNext() throws IOException {
-		assertTrue(it.hasNext());
-	}
-	
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testHasNext01() throws IOException {
-		it.next();
-		assertFalse(it.hasNext());
-	}
-	
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testHasNext02() throws IOException {
-		in = "";
-		it = new My(new StringReader(in));
-		assertFalse(it.hasNext());
-	}
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
 
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
-	 * @throws IOException 
-	 */
-	@Test
-	public final void testNext() throws IOException {
-		String s = it.next();
-		assertEquals(in, s);
-	}
-	
-	/**
-	 * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
-	 * @throws IOException 
-	 */
-	@Test(expected=NoSuchElementException.class)
-	public final void testNext01() throws IOException {
-		it.next();
-		it.next();
-	}
-	
-	@Test
-	public final void testhasNext01() throws IOException {
-		for(int i = 0; i< 100; i++){
-			assertTrue(it.hasNext());
-		}
-		it.next();
-		assertFalse(it.hasNext());
-	}
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        in = "input001";
+        it = new My(new StringReader(in));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        it = null;
+        in = null;
+    }
+
+    /**
+     * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public final void testHasNext() throws IOException {
+        assertTrue(it.hasNext());
+    }
+
+    /**
+     * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public final void testHasNext01() throws IOException {
+        it.next();
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#hasNext()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public final void testHasNext02() throws IOException {
+        in = "";
+        it = new My(new StringReader(in));
+        assertFalse(it.hasNext());
+    }
+
+    /**
+     * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public final void testNext() throws IOException {
+        String s = it.next();
+        assertEquals(in, s);
+    }
+
+    /**
+     * Test method for {@link net.sf.kerner.utils.io.buffered.AbstractIOIterator#next()}.
+     * 
+     * @throws IOException
+     */
+    @Test(expected = NoSuchElementException.class)
+    public final void testNext01() throws IOException {
+        it.next();
+        it.next();
+    }
+
+    @Test
+    public final void testhasNext01() throws IOException {
+        for (int i = 0; i < 100; i++) {
+            assertTrue(it.hasNext());
+        }
+        it.next();
+        assertFalse(it.hasNext());
+    }
 
 }

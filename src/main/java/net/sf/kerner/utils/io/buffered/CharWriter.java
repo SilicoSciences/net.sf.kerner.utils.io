@@ -18,12 +18,9 @@ package net.sf.kerner.utils.io.buffered;
 import java.io.IOException;
 
 /**
- * 
- *A {@code CharWriter} provides methods for writing characters.
- * 
+ * A {@code CharWriter} provides methods for writing characters.
  * <p>
  * <b>Example:</b><br>
- * 
  * </p>
  * <p>
  * 
@@ -35,26 +32,27 @@ import java.io.IOException;
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-19
- * 
  */
 public interface CharWriter {
 
-	/**
-	 * 
-	 * Write the next single char.
-	 *
-	 * @param c char to write
-	 * @throws IOException if writing fails
-	 */
-	void write(char c) throws IOException;
+    /**
+     * Write the next single char.
+     * 
+     * @param c
+     *            char to write
+     * @throws IOException
+     *             if writing fails
+     */
+    void write(char c) throws IOException;
 
-	/**
-	 * 
-	 * Write the next bunch of chars
-	 *
-	 * @param chars char array to write
-	 * @throws IOException if writing fails
-	 */
-	void write(char[] chars) throws IOException;
+    /**
+     * Write the next bunch of chars
+     * 
+     * @param chars
+     *            char array to write
+     * @throws IOException
+     *             if writing fails
+     */
+    void write(char[] chars) throws IOException;
 
 }

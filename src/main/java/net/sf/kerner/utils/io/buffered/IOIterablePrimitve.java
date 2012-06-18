@@ -16,31 +16,29 @@ limitations under the License.
 package net.sf.kerner.utils.io.buffered;
 
 /**
- * 
- * An instance of {@code IOIterablePrimitive} can be iterated using an {@link IOIterator} 
- * 
+ * An instance of {@code IOIterablePrimitive} can be iterated using an {@link IOIterator}
  * <p>
  * <b>Example:</b><br>
- *
  * </p>
  * <p>
+ * 
  * <pre>
  * TODO example
  * </pre>
+ * 
  * </p>
- *
+ * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-10-25
  * @see IOIterator
- *
  */
 public interface IOIterablePrimitve {
-	
-	/**
-	 * Retrieve the {@link IOIterator}.
-	 *
-	 * @return the {@code IOIterator}
-	 */
-	GeneralIOIterator getIterator();
+
+    /**
+     * Retrieve the {@link IOIterator}.
+     * 
+     * @return the {@code IOIterator}
+     */
+    GeneralIOIterator getIterator();
 
 }

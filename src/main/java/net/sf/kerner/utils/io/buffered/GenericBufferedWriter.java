@@ -19,31 +19,29 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * 
  * A {@code GenericBufferedWriter} writes something in a buffered manner.
- * 
  * <p>
  * <b>Example:</b><br>
- *
  * </p>
  * <p>
+ * 
  * <pre>
  * TODO example
  * </pre>
+ * 
  * </p>
- *
+ * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-27
- *
  */
 public interface GenericBufferedWriter extends Closeable {
-	
-	/**
-	 * 
-	 * Flush this {@code GenericBufferedWriter}.
-	 *
-	 * @throws IOException if flushing fails
-	 */
-	void flush() throws IOException;
+
+    /**
+     * Flush this {@code GenericBufferedWriter}.
+     * 
+     * @throws IOException
+     *             if flushing fails
+     */
+    void flush() throws IOException;
 
 }

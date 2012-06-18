@@ -18,12 +18,9 @@ package net.sf.kerner.utils.io;
 import java.io.IOException;
 
 /**
- * 
  * An {@code ObjectWriter} writes elements of type {@code E}.
- * 
  * <p>
  * <b>Example:</b><br>
- * 
  * </p>
  * <p>
  * 
@@ -35,18 +32,19 @@ import java.io.IOException;
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
  * @version 2010-11-27
- * 
- * @param <E> type of element
+ * @param <E>
+ *            type of element
  */
 public interface ObjectWriter<E> {
 
-	/**
-	 * 
-	 * Write element.
-	 *
-	 * @param e element to write
-	 * @throws IOException if writing fails
-	 */
-	void write(E e) throws IOException;
+    /**
+     * Write element.
+     * 
+     * @param e
+     *            element to write
+     * @throws IOException
+     *             if writing fails
+     */
+    void write(E e) throws IOException;
 
 }

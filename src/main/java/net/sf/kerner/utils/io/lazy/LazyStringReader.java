@@ -27,17 +27,14 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 /**
  * A {@code LazyStringReader} provides the ability to read a string quickly from
  * <ul>
- * <li>
- * a {@link java.io.File}</li>
- * <li>
- * a {@link java.io.Writer}</li>
- * <li>
- * an {@link java.io.InputStream}</li>
+ * <li>a {@link java.io.File}</li>
+ * <li>a {@link java.io.Writer}</li>
+ * <li>an {@link java.io.InputStream}</li>
  * </ul>
  * </p>
  * <p>
- * <b>Attention:</b> reading is not buffered! If you want to read large files,
- * consider to use {@link BufferedStringReader} instead.
+ * <b>Attention:</b> reading is not buffered! If you want to read large files, consider to use
+ * {@link BufferedStringReader} instead.
  * </p>
  * <p>
  * <b>Example:</b>
@@ -45,8 +42,8 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
  * <pre>
  * &#064;Test
  * public final void example() throws IOException {
- * 	final java.io.StringReader sr = new java.io.StringReader(&quot;Hallo Welt!&quot;);
- * 	assertEquals(&quot;Hallo Welt!&quot;, reader.read(sr));
+ *     final java.io.StringReader sr = new java.io.StringReader(&quot;Hallo Welt!&quot;);
+ *     assertEquals(&quot;Hallo Welt!&quot;, reader.read(sr));
  * }
  * </pre>
  * 
@@ -55,30 +52,29 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
  * @see java.io.Reader
  * @see java.io.InputStream
  * @version 2010-09-11
- * 
  */
 public class LazyStringReader implements GenericReader<String> {
 
-	public String read(File file) throws IOException {
-		return read(IOUtils.getInputStreamFromFile(file));
-	}
+    public String read(File file) throws IOException {
+        return read(IOUtils.getInputStreamFromFile(file));
+    }
 
-	public String read(Reader reader) throws IOException {
-		if (reader == null)
-			throw new NullPointerException();
-		final StringWriter writer = new StringWriter();
-		try {
-			IOUtils.readerToWriter(reader, writer);
-			return writer.toString();
-		} finally {
-			IOUtils.closeProperly(reader);
-			IOUtils.closeProperly(writer);
-		}
-	}
+    public String read(Reader reader) throws IOException {
+        if (reader == null)
+            throw new NullPointerException();
+        final StringWriter writer = new StringWriter();
+        try {
+            IOUtils.readerToWriter(reader, writer);
+            return writer.toString();
+        } finally {
+            IOUtils.closeProperly(reader);
+            IOUtils.closeProperly(writer);
+        }
+    }
 
-	public String read(InputStream stream) throws IOException {
-		if (stream == null)
-			throw new NullPointerException();
-		return read(IOUtils.inputStreamToReader(stream));
-	}
+    public String read(InputStream stream) throws IOException {
+        if (stream == null)
+            throw new NullPointerException();
+        return read(IOUtils.inputStreamToReader(stream));
+    }
 }

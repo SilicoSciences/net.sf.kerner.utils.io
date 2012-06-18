@@ -24,12 +24,9 @@ import java.io.Reader;
  * <p>
  * A {@code GenericReader} provides the ability to read something from
  * <ul>
- * <li>
- * a {@link java.io.File File}</li>
- * <li>
- * a {@link java.io.Reader Reader}</li>
- * <li>
- * an {@link java.io.InputStream IntputStream}</li>
+ * <li>a {@link java.io.File File}</li>
+ * <li>a {@link java.io.Reader Reader}</li>
+ * <li>an {@link java.io.InputStream IntputStream}</li>
  * </ul>
  * </p>
  * <p>
@@ -41,41 +38,37 @@ import java.io.Reader;
  * @see java.io.File File
  * @see java.io.Reader Reader
  * @see java.io.InputStream InputStream
- * 
  */
 public interface GenericReader<T> {
 
-	/**
-	 * 
-	 * Read something from a {@link File}.
-	 * 
-	 * @param file
-	 *            file that is read
-	 * @return something that is read from this file
-	 * @throws IOException
-	 */
-	public T read(File file) throws IOException;
+    /**
+     * Read something from a {@link File}.
+     * 
+     * @param file
+     *            file that is read
+     * @return something that is read from this file
+     * @throws IOException
+     */
+    public T read(File file) throws IOException;
 
-	/**
-	 * 
-	 * Read something from a {@link Reader}.
-	 * 
-	 * @param reader
-	 *            {@link Reader} from which is read
-	 * @return something that is read from this {@link Reader}
-	 * @throws IOException
-	 */
-	public T read(Reader reader) throws IOException;
+    /**
+     * Read something from a {@link Reader}.
+     * 
+     * @param reader
+     *            {@link Reader} from which is read
+     * @return something that is read from this {@link Reader}
+     * @throws IOException
+     */
+    public T read(Reader reader) throws IOException;
 
-	/**
-	 * 
-	 * Read something from an {@link InputStream}.
-	 * 
-	 * @param stream
-	 *            {@link InputStream} from which is read
-	 * @return something that is read from this {@link InputStream}
-	 * @throws IOException
-	 */
-	public T read(InputStream stream) throws IOException;
+    /**
+     * Read something from an {@link InputStream}.
+     * 
+     * @param stream
+     *            {@link InputStream} from which is read
+     * @return something that is read from this {@link InputStream}
+     * @throws IOException
+     */
+    public T read(InputStream stream) throws IOException;
 
 }
