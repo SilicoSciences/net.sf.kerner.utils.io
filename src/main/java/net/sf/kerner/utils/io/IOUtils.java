@@ -36,7 +36,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
 
-import net.sf.kerner.utils.impl.util.StringUtil;
+import net.sf.kerner.utils.impl.util.UtilString;
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 
 /**
@@ -59,12 +59,12 @@ public class IOUtils {
     /**
 	 * 
 	 */
-    public final static String NEW_LINE_STRING = StringUtil.NEW_LINE_STRING;
+    public final static char NEW_LINE_CHAR = UtilString.NEW_LINE_STRING.charAt(0);
 
     /**
 	 * 
 	 */
-    public final static char NEW_LINE_CHAR = NEW_LINE_STRING.charAt(0);
+    public final static String NEW_LINE_STRING = UtilString.NEW_LINE_STRING;
 
     /**
 	 * 
@@ -73,20 +73,50 @@ public class IOUtils {
 
     // Constructor //
 
-    /**
-     * TODO description
-     */
-    private IOUtils() {
+    public static void closeProperly(final Closeable closable) {
+        if (closable != null)
+            try {
+                closable.close();
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
 
     }
 
-    public static long InputStreamToFile(final InputStream stream, final File file) throws IOException {
-        final FileWriter w = new FileWriter(file);
-        final InputStreamReader r = new InputStreamReader(stream);
-        final long result = readerToWriter(new InputStreamReader(stream), w);
-        closeProperly(w);
-        closeProperly(r);
-        return result;
+    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException, ClassNotFoundException {
+        if (c == null || s == null)
+            throw new NullPointerException();
+        final ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        new ObjectOutputStream(bs).writeObject(s);
+        final ByteArrayInputStream bi = new ByteArrayInputStream(bs.toByteArray());
+        final V v = c.cast(new ObjectInputStream(bi).readObject());
+        bs.close();
+        bi.close();
+        return v;
+    }
+
+    /**
+     * Reads a file an returns an <code>BufferedInputStream</code> from it.
+     * 
+     * @param file
+     *            <code>File</code> from which the <code>BufferedInputStream</code> is created.
+     * @return the <code>BufferedInputStream</code>.
+     * @throws IOException
+     */
+    public static BufferedInputStream getBufferedInputStreamFromFile(final File file) throws IOException {
+        return new BufferedInputStream(new FileInputStream(file));
+    }
+
+    /**
+     * Reads a file an returns an <code>BufferedOutputStream</code> from it.
+     * 
+     * @param file
+     *            <code>File</code> from which the <code>BufferedOutputStream</code> is created.
+     * @return the <code>BufferedOutputStream</code>.
+     * @throws IOException
+     */
+    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file) throws FileNotFoundException {
+        return new BufferedOutputStream(new FileOutputStream(file));
     }
 
     /**
@@ -101,6 +131,30 @@ public class IOUtils {
         return new FileInputStream(file);
     }
 
+    public static long getOccource(final char c, final File file) throws IOException {
+        return getOccource(c, new FileInputStream(file));
+    }
+
+    public static long getOccource(final char c, final InputStream stream) throws IOException {
+        return getOccource(c, IOUtils.inputStreamToReader(stream));
+    }
+
+    public static long getOccource(final char c, final Reader reader) throws IOException {
+        final BufferedStringReader r = new BufferedStringReader(reader);
+        long result = 0;
+        char[] line;
+        while ((line = r.nextChars()) != null) {
+            for (final char l : line) {
+                if (l == c) {
+                    result++;
+                }
+            }
+        }
+        ;
+        r.close();
+        return result;
+    }
+
     /**
      * Reads a file an returns an <code>OutputStream</code> from it.
      * 
@@ -113,16 +167,125 @@ public class IOUtils {
         return new FileOutputStream(file);
     }
 
+    public static long InputStreamToFile(final InputStream stream, final File file) throws IOException {
+        final FileWriter w = new FileWriter(file);
+        final InputStreamReader r = new InputStreamReader(stream);
+        final long result = readerToWriter(new InputStreamReader(stream), w);
+        closeProperly(w);
+        closeProperly(r);
+        return result;
+    }
+
     /**
-     * Reads a file an returns an <code>BufferedInputStream</code> from it.
+     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
+     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
      * 
-     * @param file
-     *            <code>File</code> from which the <code>BufferedInputStream</code> is created.
-     * @return the <code>BufferedInputStream</code>.
+     * @param in
+     *            <code>InputStream</code> from which data is read.
+     * @param out
+     *            <code>OutputStream</code> to which data is written.
+     * @return number of bytes read/written.
      * @throws IOException
      */
-    public static BufferedInputStream getBufferedInputStreamFromFile(final File file) throws IOException {
-        return new BufferedInputStream(new FileInputStream(file));
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out) throws IOException {
+        return inputStreamToOutputStream(in, out, DEFAULT_BUFFER);
+    }
+
+    /**
+     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
+     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
+     * 
+     * @param in
+     *            <code>InputStream</code> from which data is read.
+     * @param out
+     *            <code>OutputStream</code> to which data is written.
+     * @param buffer
+     *            the number of bytes to buffer reading.
+     * @return number of bytes read/written.
+     * @throws IOException
+     */
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out, int buffer)
+            throws IOException {
+        if (buffer < 1)
+            buffer = DEFAULT_BUFFER;
+        final byte[] byteBuffer = new byte[buffer];
+        long count = 0;
+        int n = 0;
+        while ((n = in.read(byteBuffer)) != -1) {
+            out.write(byteBuffer, 0, n);
+            count += n;
+        }
+        out.flush();
+        return count;
+    }
+
+    /**
+     * Copies the content of an <code>InputStream</code> to a <code>Reader</code>. Will flush the
+     * <code>InputStream</code>, but won't close <code>Reader</code> or <code>InputStream</code>.
+     * 
+     * @param in
+     *            <code>InputStream</code> from which data is read.
+     * @return a new <code>Reader</code>
+     * @throws IOException
+     */
+    public static Reader inputStreamToReader(final InputStream in) {
+        return new InputStreamReader(in);
+    }
+
+    /**
+     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
+     * but won't close <code>InputStream</code> or <code>Writer</code>.
+     * 
+     * @param in
+     *            <code>InputStream</code> from which data is read.
+     * @param out
+     *            <code>Writer</code> to which data is written.
+     * @return number of bytes read/written.
+     * @throws IOException
+     */
+    public static long inputStreamToWriter(final InputStream in, final Writer out) throws IOException {
+        final InputStreamReader inr = new InputStreamReader(in);
+        return readerToWriter(inr, out);
+    }
+
+    /**
+     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
+     * but won't close <code>InputStream</code> or <code>Writer</code>.
+     * 
+     * @param in
+     *            <code>InputStream</code> from which data is read.
+     * @param out
+     *            <code>Writer</code> to which data is written.
+     * @param buffer
+     *            the number of bytes to buffer reading.
+     * @return number of bytes read/written.
+     * @throws IOException
+     */
+    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer) throws IOException {
+        final InputStreamReader inr = new InputStreamReader(in);
+        return readerToWriter(inr, out, buffer);
+    }
+
+    /**
+     * <p>
+     * Write an {@code Object} that implements {@link Serializable} to a file.
+     * </p>
+     * <p>
+     * Serialization is buffered: Internally a {@link BufferedOutputStream} is used.
+     * </p>
+     * 
+     * @see Serializable
+     * @param s
+     *            {@code Object} that will be serialized
+     * @param file
+     *            file to write to
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public static void objectToFile(final Serializable s, final File file) throws IOException {
+        if (s == null || file == null)
+            throw new NullPointerException();
+        objectToStream(s, new FileOutputStream(file));
     }
 
     /**
@@ -157,37 +320,32 @@ public class IOUtils {
     }
 
     /**
-     * <p>
-     * Write an {@code Object} that implements {@link Serializable} to a file.
-     * </p>
-     * <p>
-     * Serialization is buffered: Internally a {@link BufferedOutputStream} is used.
-     * </p>
+     * Copies the content of an <code>OutputStream</code> to a <code>Reader</code>. Will flush the
+     * <code>OutputStream</code>, but won't close <code>Reader</code> or <code>OutputStream</code>.
      * 
-     * @see Serializable
-     * @param s
-     *            {@code Object} that will be serialized
-     * @param file
-     *            file to write to
+     * @param out
+     *            <code>OutputStream</code> from which data is read.
+     * @param reader
+     *            <code>Reader</code> to which data is written.
+     * @return number of bytes read/written.
      * @throws IOException
-     *             if anything goes wrong
      */
-    public static void objectToFile(final Serializable s, final File file) throws IOException {
-        if (s == null || file == null)
-            throw new NullPointerException();
-        objectToStream(s, new FileOutputStream(file));
+    public static long outputStreamToReader(final OutputStream out, final Reader reader) throws IOException {
+        final OutputStreamWriter outw = new OutputStreamWriter(out);
+        return readerToWriter(reader, outw);
     }
 
     /**
-     * Reads a file an returns an <code>BufferedOutputStream</code> from it.
+     * Copies the content of an <code>OutputStream</code> to a <code>Writer</code>. Will flush the
+     * <code>OutputStream</code>, but won't close <code>Writer</code> or <code>OutputStream</code>.
      * 
-     * @param file
-     *            <code>File</code> from which the <code>BufferedOutputStream</code> is created.
-     * @return the <code>BufferedOutputStream</code>.
+     * @param out
+     *            <code>OutputStream</code> from which data is read.
+     * @return a new <code>Writer</code>
      * @throws IOException
      */
-    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file) throws FileNotFoundException {
-        return new BufferedOutputStream(new FileOutputStream(file));
+    public static Writer outputStreamToWriter(final OutputStream out) {
+        return new OutputStreamWriter(out);
     }
 
     /**
@@ -233,167 +391,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
-     * 
-     * @param in
-     *            <code>InputStream</code> from which data is read.
-     * @param out
-     *            <code>OutputStream</code> to which data is written.
-     * @param buffer
-     *            the number of bytes to buffer reading.
-     * @return number of bytes read/written.
-     * @throws IOException
+     * TODO description
      */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out, int buffer)
-            throws IOException {
-        if (buffer < 1)
-            buffer = DEFAULT_BUFFER;
-        final byte[] byteBuffer = new byte[buffer];
-        long count = 0;
-        int n = 0;
-        while ((n = in.read(byteBuffer)) != -1) {
-            out.write(byteBuffer, 0, n);
-            count += n;
-        }
-        out.flush();
-        return count;
-    }
+    private IOUtils() {
 
-    /**
-     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
-     * but won't close <code>InputStream</code> or <code>Writer</code>.
-     * 
-     * @param in
-     *            <code>InputStream</code> from which data is read.
-     * @param out
-     *            <code>Writer</code> to which data is written.
-     * @return number of bytes read/written.
-     * @throws IOException
-     */
-    public static long inputStreamToWriter(final InputStream in, final Writer out) throws IOException {
-        final InputStreamReader inr = new InputStreamReader(in);
-        return readerToWriter(inr, out);
-    }
-
-    /**
-     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
-     * but won't close <code>InputStream</code> or <code>Writer</code>.
-     * 
-     * @param in
-     *            <code>InputStream</code> from which data is read.
-     * @param out
-     *            <code>Writer</code> to which data is written.
-     * @param buffer
-     *            the number of bytes to buffer reading.
-     * @return number of bytes read/written.
-     * @throws IOException
-     */
-    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer) throws IOException {
-        final InputStreamReader inr = new InputStreamReader(in);
-        return readerToWriter(inr, out, buffer);
-    }
-
-    /**
-     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
-     * 
-     * @param in
-     *            <code>InputStream</code> from which data is read.
-     * @param out
-     *            <code>OutputStream</code> to which data is written.
-     * @return number of bytes read/written.
-     * @throws IOException
-     */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out) throws IOException {
-        return inputStreamToOutputStream(in, out, DEFAULT_BUFFER);
-    }
-
-    /**
-     * Copies the content of an <code>OutputStream</code> to a <code>Reader</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>Reader</code> or <code>OutputStream</code>.
-     * 
-     * @param out
-     *            <code>OutputStream</code> from which data is read.
-     * @param reader
-     *            <code>Reader</code> to which data is written.
-     * @return number of bytes read/written.
-     * @throws IOException
-     */
-    public static long outputStreamToReader(final OutputStream out, final Reader reader) throws IOException {
-        final OutputStreamWriter outw = new OutputStreamWriter(out);
-        return readerToWriter(reader, outw);
-    }
-
-    /**
-     * Copies the content of an <code>OutputStream</code> to a <code>Writer</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>Writer</code> or <code>OutputStream</code>.
-     * 
-     * @param out
-     *            <code>OutputStream</code> from which data is read.
-     * @return a new <code>Writer</code>
-     * @throws IOException
-     */
-    public static Writer outputStreamToWriter(final OutputStream out) {
-        return new OutputStreamWriter(out);
-    }
-
-    /**
-     * Copies the content of an <code>InputStream</code> to a <code>Reader</code>. Will flush the
-     * <code>InputStream</code>, but won't close <code>Reader</code> or <code>InputStream</code>.
-     * 
-     * @param in
-     *            <code>InputStream</code> from which data is read.
-     * @return a new <code>Reader</code>
-     * @throws IOException
-     */
-    public static Reader inputStreamToReader(final InputStream in) {
-        return new InputStreamReader(in);
-    }
-
-    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException, ClassNotFoundException {
-        if (c == null || s == null)
-            throw new NullPointerException();
-        final ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        new ObjectOutputStream(bs).writeObject(s);
-        final ByteArrayInputStream bi = new ByteArrayInputStream(bs.toByteArray());
-        final V v = c.cast(new ObjectInputStream(bi).readObject());
-        bs.close();
-        bi.close();
-        return v;
-    }
-
-    public static void closeProperly(final Closeable closable) {
-        if (closable != null)
-            try {
-                closable.close();
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-
-    }
-
-    public static long getOccource(final char c, final Reader reader) throws IOException {
-        final BufferedStringReader r = new BufferedStringReader(reader);
-        long result = 0;
-        char[] line;
-        while ((line = r.nextChars()) != null) {
-            for (final char l : line) {
-                if (l == c) {
-                    result++;
-                }
-            }
-        }
-        ;
-        r.close();
-        return result;
-    }
-
-    public static long getOccource(final char c, final InputStream stream) throws IOException {
-        return getOccource(c, IOUtils.inputStreamToReader(stream));
-    }
-
-    public static long getOccource(final char c, final File file) throws IOException {
-        return getOccource(c, new FileInputStream(file));
     }
 }

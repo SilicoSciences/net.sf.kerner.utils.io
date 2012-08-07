@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import net.sf.kerner.utils.impl.util.ArrayUtil;
+import net.sf.kerner.utils.impl.util.UtilArray;
 import net.sf.kerner.utils.io.IOUtils;
 import net.sf.kerner.utils.io.buffered.CharReader;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
@@ -132,6 +132,17 @@ public class BufferedStringReader implements Closeable, CharReader {
     // Constructor //
 
     /**
+     * * Helper method to work on "same" BufferedReader.
+     * 
+     * @param reader
+     */
+    public BufferedStringReader(final BufferedReader reader) {
+        synchronized (BufferedStringReader.class) {
+            this.reader = reader;
+        }
+    }
+
+    /**
      * <p>
      * Construct a new {@code BufferedStringReader} that will from a file.
      * </p>
@@ -149,31 +160,6 @@ public class BufferedStringReader implements Closeable, CharReader {
 
     /**
      * <p>
-     * Construct a new {@code BufferedStringReader} that will read from a {@link java.io.Reader}.
-     * </p>
-     * 
-     * @param reader
-     *            reader that is read
-     */
-    public BufferedStringReader(final Reader reader) {
-        synchronized (BufferedStringReader.class) {
-            this.reader = new BufferedReader(reader, IOUtils.DEFAULT_BUFFER);
-        }
-    }
-
-    /**
-     * * Helper method to work on "same" BufferedReader.
-     * 
-     * @param reader
-     */
-    public BufferedStringReader(final BufferedReader reader) {
-        synchronized (BufferedStringReader.class) {
-            this.reader = reader;
-        }
-    }
-
-    /**
-     * <p>
      * Construct a new {@code BufferedStringReader} that will read from a {@link java.io.InputStream}.
      * </p>
      * 
@@ -186,7 +172,95 @@ public class BufferedStringReader implements Closeable, CharReader {
         }
     }
 
+    /**
+     * <p>
+     * Construct a new {@code BufferedStringReader} that will read from a {@link java.io.Reader}.
+     * </p>
+     * 
+     * @param reader
+     *            reader that is read
+     */
+    public BufferedStringReader(final Reader reader) {
+        synchronized (BufferedStringReader.class) {
+            this.reader = new BufferedReader(reader, IOUtils.DEFAULT_BUFFER);
+        }
+    }
+
     // Public //
+
+    /**
+	 * 
+	 */
+    public synchronized void close() {
+        IOUtils.closeProperly(reader);
+    }
+
+    /**
+	 * 
+	 */
+    public synchronized int nextChar() throws IOException {
+        return reader.read();
+    }
+
+    /**
+	 * 
+	 */
+    public synchronized char[] nextChars() throws IOException {
+        return nextChars(IOUtils.DEFAULT_BUFFER);
+    }
+
+    // Override //
+
+    //
+
+    // Implement //
+
+    /**
+	 * 
+	 */
+    public synchronized char[] nextChars(final int bufferSize) throws IOException {
+        if (bufferSize < 1)
+            throw new IllegalArgumentException();
+        final char[] buffer = new char[bufferSize];
+        final int read = reader.read(buffer);
+        if (read == -1) {
+            // nothing left to read
+            return null;
+        }
+        return UtilArray.trim(buffer, read);
+    }
+
+    /**
+     * Read a line of text. A line is considered to be terminated by any one of a line feed ('\n'), a carriage return
+     * ('\r'), or a carriage return followed immediately by a linefeed.
+     * 
+     * @return A String containing the contents of the line, not including any line-termination characters, or null if
+     *         the end of the stream has been reached
+     * @throws IOException
+     * @see java.io.BufferedReader#readLine()
+     */
+    public synchronized String nextLine() throws IOException {
+        return reader.readLine();
+    }
+
+    /**
+     * <p>
+     * Read and return the next string, using a default buffer size of {@link IOUtils#DEFAULT_BUFFER}.
+     * </p>
+     * <p>
+     * The string that is read will have at most a length of {@link IOUtils#DEFAULT_BUFFER}.
+     * </p>
+     * <p>
+     * If there is nothing (left) to read, {@code null} will be returned.
+     * </p>
+     * 
+     * @return the string that was read
+     * @throws IOException
+     *             if anything goes wrong
+     */
+    public synchronized String nextString() throws IOException {
+        return nextString(IOUtils.DEFAULT_BUFFER);
+    }
 
     /**
      * <p>
@@ -210,80 +284,6 @@ public class BufferedStringReader implements Closeable, CharReader {
         if (result == null)
             return null;
         return String.valueOf(result);
-    }
-
-    /**
-     * <p>
-     * Read and return the next string, using a default buffer size of {@link IOUtils#DEFAULT_BUFFER}.
-     * </p>
-     * <p>
-     * The string that is read will have at most a length of {@link IOUtils#DEFAULT_BUFFER}.
-     * </p>
-     * <p>
-     * If there is nothing (left) to read, {@code null} will be returned.
-     * </p>
-     * 
-     * @return the string that was read
-     * @throws IOException
-     *             if anything goes wrong
-     */
-    public synchronized String nextString() throws IOException {
-        return nextString(IOUtils.DEFAULT_BUFFER);
-    }
-
-    /**
-     * Read a line of text. A line is considered to be terminated by any one of a line feed ('\n'), a carriage return
-     * ('\r'), or a carriage return followed immediately by a linefeed.
-     * 
-     * @return A String containing the contents of the line, not including any line-termination characters, or null if
-     *         the end of the stream has been reached
-     * @throws IOException
-     * @see java.io.BufferedReader#readLine()
-     */
-    public synchronized String nextLine() throws IOException {
-        return reader.readLine();
-    }
-
-    // Override //
-
-    //
-
-    // Implement //
-
-    /**
-	 * 
-	 */
-    public synchronized void close() {
-        IOUtils.closeProperly(reader);
-    }
-
-    /**
-	 * 
-	 */
-    public synchronized char[] nextChars(final int bufferSize) throws IOException {
-        if (bufferSize < 1)
-            throw new IllegalArgumentException();
-        final char[] buffer = new char[bufferSize];
-        final int read = reader.read(buffer);
-        if (read == -1) {
-            // nothing left to read
-            return null;
-        }
-        return ArrayUtil.trim(buffer, read);
-    }
-
-    /**
-	 * 
-	 */
-    public synchronized char[] nextChars() throws IOException {
-        return nextChars(IOUtils.DEFAULT_BUFFER);
-    }
-
-    /**
-	 * 
-	 */
-    public synchronized int nextChar() throws IOException {
-        return reader.read();
     }
 
 }
