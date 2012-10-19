@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2009-2010 Alexander Kerner. All rights reserved.
+Copyright (c) 2009-2012 Alexander Kerner. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -50,18 +50,27 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringWriter;
  *     assertEquals(&quot;Hallo Welt!&quot;, wr.toString());
  * }
  * </pre>
+ * <p>
+ * <b>Note:</b> It is not necessary to close a {@code LazyStringWriter}. This will happen automatically.
+ * </p>
  * 
  * @author Alexander Kerner
  * @see java.io.File
  * @see java.io.Writer
  * @see java.io.OutputStream
- * @version 2010-09-10
+ * @version 2012-10-19
  */
 public class LazyStringWriter implements GenericWriter {
 
     private final String string;
 
-    public LazyStringWriter(Object toString) {
+    /**
+     * Creates a new {@code LazyStringWriter}, which will write {@code toString}.
+     * 
+     * @param toString
+     *            Object which will be written
+     */
+    public LazyStringWriter(final Object toString) {
         if (toString == null)
             throw new NullPointerException();
         this.string = toString.toString();
@@ -69,11 +78,15 @@ public class LazyStringWriter implements GenericWriter {
 
     // Implement //
 
-    public void write(File file) throws IOException {
+    public void write(final File file) throws IOException {
         write(new FileWriter(file));
     }
 
-    public void write(Writer writer) throws IOException {
+    public void write(final OutputStream stream) throws IOException {
+        write(IOUtils.outputStreamToWriter(stream));
+    }
+
+    public void write(final Writer writer) throws IOException {
         StringReader reader = null;
         try {
             reader = new StringReader(string);
@@ -82,9 +95,5 @@ public class LazyStringWriter implements GenericWriter {
             IOUtils.closeProperly(writer);
             IOUtils.closeProperly(reader);
         }
-    }
-
-    public void write(OutputStream stream) throws IOException {
-        write(IOUtils.outputStreamToWriter(stream));
     }
 }
