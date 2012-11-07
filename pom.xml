@@ -39,6 +39,11 @@
 		<developerConnection>scm:git:ssh://akerner@kerner-utils-io.git.sourceforge.net/gitroot/kerner-utils-io/kerner-utils-io</developerConnection>
 	</scm>
 	<distributionManagement>
+		<repository>
+			<id>sourceforge-kerner-utils-io</id>
+			<url>
+sftp://frs.sourceforge.net:/home/frs/project/k/ke/kerner-utils-io/releases</url>
+		</repository>
 		<site>
 			<id>sourceforge-kerner-utils-io</id>
 			<url>sftp://frs.sourceforge.net:/home/groups/k/ke/kerner-utils-io/htdocs</url>
