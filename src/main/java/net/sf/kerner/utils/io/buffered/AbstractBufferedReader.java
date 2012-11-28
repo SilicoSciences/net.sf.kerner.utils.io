@@ -39,33 +39,6 @@ public abstract class AbstractBufferedReader {
     protected BufferedReader reader;
 
     /**
-     * Create a new {@code AbstractBufferedReader} from a file.
-     * 
-     * @param file
-     *            file from which is read
-     * @throws FileNotFoundException
-     * @see java.io.File
-     */
-    public AbstractBufferedReader(File file) throws FileNotFoundException {
-        synchronized (AbstractBufferedReader.class) {
-            this.reader = new BufferedReader(IOUtils.inputStreamToReader(new FileInputStream(file)));
-        }
-    }
-
-    /**
-     * Create a new {@code AbstractBufferedReader} from a {@link java.io.Reader} .
-     * 
-     * @param reader
-     *            reader from which is read
-     * @see java.io.Reader
-     */
-    public AbstractBufferedReader(Reader reader) {
-        synchronized (AbstractBufferedReader.class) {
-            this.reader = new BufferedReader(reader);
-        }
-    }
-
-    /**
      * Create a new {@code AbstractBufferedReader} from a {@link java.io.BufferedReader}.
      * <p>
      * <b>Note:</b> Passed in {@code java.io.BufferedReader} is kept as a reference. Use this constructor if you want to
@@ -76,9 +49,23 @@ public abstract class AbstractBufferedReader {
      *            buffered reader from which is read
      * @see java.io.BufferedReader
      */
-    public AbstractBufferedReader(BufferedReader reader) {
+    public AbstractBufferedReader(final BufferedReader reader) {
         synchronized (AbstractBufferedReader.class) {
             this.reader = reader;
+        }
+    }
+
+    /**
+     * Create a new {@code AbstractBufferedReader} from a file.
+     * 
+     * @param file
+     *            file from which is read
+     * @throws FileNotFoundException
+     * @see java.io.File
+     */
+    public AbstractBufferedReader(final File file) throws FileNotFoundException {
+        synchronized (AbstractBufferedReader.class) {
+            this.reader = new BufferedReader(IOUtils.inputStreamToReader(new FileInputStream(file)));
         }
     }
 
@@ -89,9 +76,22 @@ public abstract class AbstractBufferedReader {
      *            stream from which is read
      * @see java.io.InputStream
      */
-    public AbstractBufferedReader(InputStream stream) {
+    public AbstractBufferedReader(final InputStream stream) {
         synchronized (AbstractBufferedReader.class) {
             this.reader = new BufferedReader(IOUtils.inputStreamToReader(stream));
+        }
+    }
+
+    /**
+     * Create a new {@code AbstractBufferedReader} from a {@link java.io.Reader} .
+     * 
+     * @param reader
+     *            reader from which is read
+     * @see java.io.Reader
+     */
+    public AbstractBufferedReader(final Reader reader) {
+        synchronized (AbstractBufferedReader.class) {
+            this.reader = new BufferedReader(reader);
         }
     }
 
@@ -103,4 +103,5 @@ public abstract class AbstractBufferedReader {
             IOUtils.closeProperly(reader);
         }
     }
+
 }

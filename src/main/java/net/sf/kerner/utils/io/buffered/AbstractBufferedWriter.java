@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
+import net.sf.kerner.utils.io.FileUtils;
 import net.sf.kerner.utils.io.IOUtils;
 
 /**
@@ -49,21 +50,10 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
      * @throws IOException
      *             if opening file for writing fails
      */
-    public AbstractBufferedWriter(File file) throws IOException {
+    public AbstractBufferedWriter(final File file) throws IOException {
         synchronized (AbstractBufferedWriter.class) {
+            FileUtils.fileCheck(file, true);
             writer = new BufferedWriter(new FileWriter(file));
-        }
-    }
-
-    /**
-     * Create a new {@code AbstractBufferedWriter} that will write to given writer.
-     * 
-     * @param writer
-     *            writer to write to
-     */
-    public AbstractBufferedWriter(Writer writer) {
-        synchronized (AbstractBufferedWriter.class) {
-            this.writer = new BufferedWriter(writer);
         }
     }
 
@@ -73,9 +63,21 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
      * @param stream
      *            OutputStream to write to
      */
-    public AbstractBufferedWriter(OutputStream stream) {
+    public AbstractBufferedWriter(final OutputStream stream) {
         synchronized (AbstractBufferedWriter.class) {
             writer = new BufferedWriter(IOUtils.outputStreamToWriter(stream));
+        }
+    }
+
+    /**
+     * Create a new {@code AbstractBufferedWriter} that will write to given writer.
+     * 
+     * @param writer
+     *            writer to write to
+     */
+    public AbstractBufferedWriter(final Writer writer) {
+        synchronized (AbstractBufferedWriter.class) {
+            this.writer = new BufferedWriter(writer);
         }
     }
 
