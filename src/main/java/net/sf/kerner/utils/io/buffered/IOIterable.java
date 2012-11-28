@@ -31,12 +31,14 @@ import java.io.IOException;
  * </p>
  * 
  * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2010-10-25
+ * @version 2011-11-28
  * @param <E>
  *            type of elements which are iterated
  * @see java.lang.Iterable Iterable
  */
 public interface IOIterable<E> {
+
+    void close();
 
     /**
      * Retrieve the {@code IOIterator}.
