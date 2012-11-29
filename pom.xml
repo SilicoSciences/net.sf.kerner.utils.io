@@ -52,7 +52,7 @@ sftp://frs.sourceforge.net:/home/frs/project/k/ke/kerner-utils-io/releases</url>
 		<dependency>
 			<groupId>net.sf.kerner-utils</groupId>
 			<artifactId>kerner-utils</artifactId>
-			<version>0.14.0</version>
+			<version>0.16.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
