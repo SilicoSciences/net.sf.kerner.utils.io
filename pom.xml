@@ -38,11 +38,6 @@
 		<developerConnection>scm:git:ssh://akerner@git.code.sf.net/p/kerner-utils-io/code</developerConnection>
 	</scm>
 	<distributionManagement>
-		<repository>
-			<id>sourceforge-kerner-utils-io</id>
-			<url>
-sftp://frs.sourceforge.net:/home/frs/project/k/ke/kerner-utils-io/releases</url>
-		</repository>
 		<site>
 			<id>sourceforge-kerner-utils-io</id>
 			<url>sftp://frs.sourceforge.net:/home/groups/k/ke/kerner-utils-io/htdocs</url>
@@ -57,7 +52,7 @@ sftp://frs.sourceforge.net:/home/frs/project/k/ke/kerner-utils-io/releases</url>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
