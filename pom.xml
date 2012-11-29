@@ -18,7 +18,7 @@
 		<developer>
 			<id>kerner</id>
 			<name>Alexander Kerner</name>
-			<email>alex.kerner.24@googlemail.com</email>
+			<email>alexanderkerner24@googlemail.com</email>
 			<roles>
 				<role>Project Manager</role>
 				<role>Architect</role>
@@ -32,10 +32,10 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>git://kerner-utils.git.sourceforge.net/gitroot/kerner-utils/kerner-utils-io 
+		<url>git://git.code.sf.net/p/kerner-utils-io/code 
 		</url>
-		<connection>scm:git:git://kerner-utils-io.git.sourceforge.net/gitroot/kerner-utils-io/kerner-utils-io</connection>
-		<developerConnection>scm:git:ssh://akerner@kerner-utils-io.git.sourceforge.net/gitroot/kerner-utils-io/kerner-utils-io</developerConnection>
+		<connection>scm:git:git://git.code.sf.net/p/kerner-utils-io/code</connection>
+		<developerConnection>scm:git:ssh://akerner@git.code.sf.net/p/kerner-utils-io/code</developerConnection>
 	</scm>
 	<distributionManagement>
 		<repository>
