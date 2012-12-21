@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: kerner-utils-io
+Bundle-SymbolicName: net.sf.kerner-utils-io
+Bundle-Version: 0.4.3.SNAPSHOT
+Export-Package: net.sf.kerner.utils.io,
+ net.sf.kerner.utils.io.buffered,
+ net.sf.kerner.utils.io.buffered.impl,
+ net.sf.kerner.utils.io.lazy
