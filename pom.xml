@@ -41,24 +41,24 @@
 	<distributionManagement>
 		<site>
 			<id>sourceforge-kerner-utils-io</id>
-			<url>sftp://frs.sourceforge.net:/home/groups/k/ke/kerner-utils-io/htdocs</url>
+			<url>scp://shell.sourceforge.net/home/project-web/kerner-utils-io/htdocs</url>
 		</site>
 	</distributionManagement>
-	<dependencies>
-		<dependency>
-			<groupId>net.sf.kerner-utils</groupId>
-			<artifactId>kerner-utils</artifactId>
-			<version>0.17.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.2</version>
+				<dependencies>
+					<dependency><!-- add support for ssh/scp -->
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ssh</artifactId>
+						<version>1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
@@ -163,6 +163,33 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
+							<Bundle-Description>${project.description}</Bundle-Description>
+							<Implementation-Version>${project.version}</Implementation-Version>
+						</manifestEntries>
+						<manifestFile>META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.kerner-utils</groupId>
+			<artifactId>kerner-utils</artifactId>
+			<version>0.17.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
