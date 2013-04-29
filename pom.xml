@@ -182,7 +182,7 @@
 		<dependency>
 			<groupId>net.sf.kerner-utils</groupId>
 			<artifactId>kerner-utils</artifactId>
-			<version>0.17.4</version>
+			<version>0.18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
