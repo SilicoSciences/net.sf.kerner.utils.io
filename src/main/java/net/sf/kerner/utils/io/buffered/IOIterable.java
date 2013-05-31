@@ -15,10 +15,12 @@ limitations under the License.
 
 package net.sf.kerner.utils.io.buffered;
 
+import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * An instance of {@code IOIterable} provides an [@link IOIterator} for reading elements in an iterator based manner.
+ * An instance of {@code IOIterable} provides an [@link IOIterator} for reading
+ * elements in an iterator based manner.
  * <p>
  * <b>Example:</b><br>
  * </p>
@@ -36,7 +38,7 @@ import java.io.IOException;
  *            type of elements which are iterated
  * @see java.lang.Iterable Iterable
  */
-public interface IOIterable<E> {
+public interface IOIterable<E> extends Closeable {
 
     void close();
 
