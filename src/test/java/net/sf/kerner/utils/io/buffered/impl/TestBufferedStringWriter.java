@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
 import org.junit.After;
@@ -133,7 +133,7 @@ public class TestBufferedStringWriter {
     public final void testWriteNextLine() throws IOException {
         writer.writeNextLine(s);
         writer.close();
-        assertEquals(s + IOUtils.NEW_LINE_STRING, sw.toString());
+        assertEquals(s + UtilIO.NEW_LINE_STRING, sw.toString());
     }
 
     /**

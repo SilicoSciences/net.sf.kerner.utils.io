@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 
 /**
  * An {@code AbstractBufferedReader} provides a {@link BufferedReader} instance for buffered reading as well as
@@ -65,7 +65,7 @@ public abstract class AbstractBufferedReader {
      */
     public AbstractBufferedReader(final File file) throws FileNotFoundException {
         synchronized (AbstractBufferedReader.class) {
-            this.reader = new BufferedReader(IOUtils.inputStreamToReader(new FileInputStream(file)));
+            this.reader = new BufferedReader(UtilIO.inputStreamToReader(new FileInputStream(file)));
         }
     }
 
@@ -78,7 +78,7 @@ public abstract class AbstractBufferedReader {
      */
     public AbstractBufferedReader(final InputStream stream) {
         synchronized (AbstractBufferedReader.class) {
-            this.reader = new BufferedReader(IOUtils.inputStreamToReader(stream));
+            this.reader = new BufferedReader(UtilIO.inputStreamToReader(stream));
         }
     }
 
@@ -100,7 +100,7 @@ public abstract class AbstractBufferedReader {
      */
     public void close() {
         synchronized (reader) {
-            IOUtils.closeProperly(reader);
+            UtilIO.closeProperly(reader);
         }
     }
 

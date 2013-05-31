@@ -17,7 +17,7 @@ package net.sf.kerner.utils.io.buffered;
 
 import java.io.IOException;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 
 /**
  * A {@code CharReader} provides methods for reading characters.
@@ -46,7 +46,7 @@ public interface CharReader {
     char[] nextChars(int bufferSize) throws IOException;
 
     /**
-     * Read the next bunch of chars, using a default buffer size ( {@link IOUtils#DEFAULT_BUFFER})
+     * Read the next bunch of chars, using a default buffer size ( {@link UtilIO#DEFAULT_BUFFER})
      * <p>
      * If available number of characters is smaller than {@code bufferSize}, returned array contains all available
      * characters and its size is equal number of read characters.

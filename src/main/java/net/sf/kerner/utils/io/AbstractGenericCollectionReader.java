@@ -19,7 +19,7 @@ public abstract class AbstractGenericCollectionReader<T> implements GenericColle
 	 * 
 	 */
     public Collection<T> readAll(InputStream stream) throws IOException {
-        return readAll(IOUtils.inputStreamToReader(stream));
+        return readAll(UtilIO.inputStreamToReader(stream));
     }
 
 }

@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
 import org.junit.After;
@@ -282,7 +282,7 @@ public class TestBufferedStringReader {
      */
     @Test
     public final void testNextLine01() throws IOException {
-        final BufferedStringReader reader = new BufferedStringReader(new StringReader("aa" + IOUtils.NEW_LINE_STRING
+        final BufferedStringReader reader = new BufferedStringReader(new StringReader("aa" + UtilIO.NEW_LINE_STRING
                 + "bb"));
         final String s2 = String.valueOf(reader.nextLine());
         reader.close();

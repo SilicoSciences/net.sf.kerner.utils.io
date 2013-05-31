@@ -23,7 +23,7 @@ import java.io.StringReader;
 import java.io.Writer;
 
 import net.sf.kerner.utils.io.GenericWriter;
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringWriter;
 
 /**
@@ -83,17 +83,17 @@ public class LazyStringWriter implements GenericWriter {
     }
 
     public void write(final OutputStream stream) throws IOException {
-        write(IOUtils.outputStreamToWriter(stream));
+        write(UtilIO.outputStreamToWriter(stream));
     }
 
     public void write(final Writer writer) throws IOException {
         StringReader reader = null;
         try {
             reader = new StringReader(string);
-            IOUtils.readerToWriter(reader, writer);
+            UtilIO.readerToWriter(reader, writer);
         } finally {
-            IOUtils.closeProperly(writer);
-            IOUtils.closeProperly(reader);
+            UtilIO.closeProperly(writer);
+            UtilIO.closeProperly(reader);
         }
     }
 }

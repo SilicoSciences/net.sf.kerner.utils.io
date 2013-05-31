@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.io.Reader;
 
 import net.sf.kerner.utils.impl.util.UtilArray;
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.buffered.CharReader;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
@@ -154,7 +154,7 @@ public class BufferedStringReader implements Closeable, CharReader {
      */
     public BufferedStringReader(final File file) throws IOException {
         synchronized (BufferedStringReader.class) {
-            this.reader = new BufferedReader(IOUtils.inputStreamToReader(new FileInputStream(file)));
+            this.reader = new BufferedReader(UtilIO.inputStreamToReader(new FileInputStream(file)));
         }
     }
 
@@ -168,7 +168,7 @@ public class BufferedStringReader implements Closeable, CharReader {
      */
     public BufferedStringReader(final InputStream stream) {
         synchronized (BufferedStringReader.class) {
-            this.reader = new BufferedReader(IOUtils.inputStreamToReader(stream));
+            this.reader = new BufferedReader(UtilIO.inputStreamToReader(stream));
         }
     }
 
@@ -182,7 +182,7 @@ public class BufferedStringReader implements Closeable, CharReader {
      */
     public BufferedStringReader(final Reader reader) {
         synchronized (BufferedStringReader.class) {
-            this.reader = new BufferedReader(reader, IOUtils.DEFAULT_BUFFER);
+            this.reader = new BufferedReader(reader, UtilIO.DEFAULT_BUFFER);
         }
     }
 
@@ -192,7 +192,7 @@ public class BufferedStringReader implements Closeable, CharReader {
 	 * 
 	 */
     public synchronized void close() {
-        IOUtils.closeProperly(reader);
+        UtilIO.closeProperly(reader);
     }
 
     /**
@@ -206,7 +206,7 @@ public class BufferedStringReader implements Closeable, CharReader {
 	 * 
 	 */
     public synchronized char[] nextChars() throws IOException {
-        return nextChars(IOUtils.DEFAULT_BUFFER);
+        return nextChars(UtilIO.DEFAULT_BUFFER);
     }
 
     // Override //
@@ -245,10 +245,10 @@ public class BufferedStringReader implements Closeable, CharReader {
 
     /**
      * <p>
-     * Read and return the next string, using a default buffer size of {@link IOUtils#DEFAULT_BUFFER}.
+     * Read and return the next string, using a default buffer size of {@link UtilIO#DEFAULT_BUFFER}.
      * </p>
      * <p>
-     * The string that is read will have at most a length of {@link IOUtils#DEFAULT_BUFFER}.
+     * The string that is read will have at most a length of {@link UtilIO#DEFAULT_BUFFER}.
      * </p>
      * <p>
      * If there is nothing (left) to read, {@code null} will be returned.
@@ -259,7 +259,7 @@ public class BufferedStringReader implements Closeable, CharReader {
      *             if anything goes wrong
      */
     public synchronized String nextString() throws IOException {
-        return nextString(IOUtils.DEFAULT_BUFFER);
+        return nextString(UtilIO.DEFAULT_BUFFER);
     }
 
     /**

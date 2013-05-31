@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 import net.sf.kerner.utils.io.FileUtils;
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 
 /**
  * An {@code AbstractBufferedWriter} provides a prototype implementation for {@link GenericBufferedWriter} with
@@ -65,7 +65,7 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
      */
     public AbstractBufferedWriter(final OutputStream stream) {
         synchronized (AbstractBufferedWriter.class) {
-            writer = new BufferedWriter(IOUtils.outputStreamToWriter(stream));
+            writer = new BufferedWriter(UtilIO.outputStreamToWriter(stream));
         }
     }
 
@@ -86,7 +86,7 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
      */
     public void close() {
         synchronized (writer) {
-            IOUtils.closeProperly(writer);
+            UtilIO.closeProperly(writer);
         }
     }
 

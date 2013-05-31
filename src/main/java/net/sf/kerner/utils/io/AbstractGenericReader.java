@@ -42,7 +42,7 @@ public abstract class AbstractGenericReader<T> implements GenericReader<T> {
 	 * 
 	 */
     public T read(InputStream stream) throws IOException {
-        return read(IOUtils.inputStreamToReader(stream));
+        return read(UtilIO.inputStreamToReader(stream));
     }
 
 }

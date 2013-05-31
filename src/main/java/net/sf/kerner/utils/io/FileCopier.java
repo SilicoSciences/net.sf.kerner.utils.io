@@ -32,7 +32,7 @@ public class FileCopier {
     public FileCopier(File in, File out) throws IOException {
         if (!FileUtils.fileCheck(in, false))
             throw new FileNotFoundException("cannot read " + in);
-        this.inStream = IOUtils.getInputStreamFromFile(in);
+        this.inStream = UtilIO.getInputStreamFromFile(in);
         this.outFile = out;
     }
 
@@ -40,14 +40,14 @@ public class FileCopier {
         final File in = new File(inFilePath);
         if (!FileUtils.fileCheck(in, false))
             throw new FileNotFoundException("cannot read " + in);
-        this.inStream = IOUtils.getInputStreamFromFile(in);
+        this.inStream = UtilIO.getInputStreamFromFile(in);
         this.outFile = new File(outFilePath);
     }
 
     public FileCopier(File inFile, File outDir, String outFileName) throws IOException {
         if (!FileUtils.fileCheck(inFile, false))
             throw new FileNotFoundException("cannot read " + inFile);
-        this.inStream = IOUtils.getInputStreamFromFile(inFile);
+        this.inStream = UtilIO.getInputStreamFromFile(inFile);
         this.outFile = new File(outDir, outFileName);
     }
 
@@ -58,7 +58,7 @@ public class FileCopier {
         final BufferedWriter bw = new BufferedWriter(writer);
         long r = 0;
         try {
-            r = IOUtils.readerToWriter(br, bw);
+            r = UtilIO.readerToWriter(br, bw);
         } finally {
             bw.flush();
             bw.close();

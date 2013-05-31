@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.LineWriter;
 import net.sf.kerner.utils.io.ObjectWriter;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedWriter;
@@ -158,7 +158,7 @@ public class BufferedStringWriter extends AbstractBufferedWriter implements Char
     // Implement //
 
     /**
-     * Write the next string and append a {@link IOUtils#NEW_LINE_STRING}.
+     * Write the next string and append a {@link UtilIO#NEW_LINE_STRING}.
      * 
      * @param line
      *            line that is written
@@ -167,7 +167,7 @@ public class BufferedStringWriter extends AbstractBufferedWriter implements Char
      */
     public synchronized void writeNextLine(String line) throws IOException {
         writer.write(line);
-        writer.write(IOUtils.NEW_LINE_STRING);
+        writer.write(UtilIO.NEW_LINE_STRING);
     }
 
     /**

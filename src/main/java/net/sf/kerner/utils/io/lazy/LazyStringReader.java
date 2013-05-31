@@ -21,7 +21,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 
 import net.sf.kerner.utils.io.GenericReader;
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 
 /**
@@ -56,7 +56,7 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
 public class LazyStringReader implements GenericReader<String> {
 
     public String read(File file) throws IOException {
-        return read(IOUtils.getInputStreamFromFile(file));
+        return read(UtilIO.getInputStreamFromFile(file));
     }
 
     public String read(Reader reader) throws IOException {
@@ -64,17 +64,17 @@ public class LazyStringReader implements GenericReader<String> {
             throw new NullPointerException();
         final StringWriter writer = new StringWriter();
         try {
-            IOUtils.readerToWriter(reader, writer);
+            UtilIO.readerToWriter(reader, writer);
             return writer.toString();
         } finally {
-            IOUtils.closeProperly(reader);
-            IOUtils.closeProperly(writer);
+            UtilIO.closeProperly(reader);
+            UtilIO.closeProperly(writer);
         }
     }
 
     public String read(InputStream stream) throws IOException {
         if (stream == null)
             throw new NullPointerException();
-        return read(IOUtils.inputStreamToReader(stream));
+        return read(UtilIO.inputStreamToReader(stream));
     }
 }

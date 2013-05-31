@@ -48,7 +48,7 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
  *         Kerner</a>
  * @version 2013-05-31
  */
-public class IOUtils {
+public class UtilIO {
 
     /**
      * The JCL book specifies the default buffer size as 8K characters.
@@ -136,7 +136,7 @@ public class IOUtils {
     }
 
     public static long getOccource(final char c, final InputStream stream) throws IOException {
-        return getOccource(c, IOUtils.inputStreamToReader(stream));
+        return getOccource(c, UtilIO.inputStreamToReader(stream));
     }
 
     public static long getOccource(final char c, final Reader reader) throws IOException {
@@ -406,7 +406,7 @@ public class IOUtils {
     /**
      * TODO description
      */
-    private IOUtils() {
+    private UtilIO() {
 
     }
 }

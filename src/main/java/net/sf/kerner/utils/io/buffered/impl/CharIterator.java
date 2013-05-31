@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.NoSuchElementException;
 
-import net.sf.kerner.utils.io.IOUtils;
+import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.buffered.AbstractBufferedReader;
 import net.sf.kerner.utils.io.buffered.GeneralIOIterator;
 import net.sf.kerner.utils.io.buffered.IOIterator;
@@ -269,7 +269,7 @@ public class CharIterator extends AbstractBufferedReader implements GeneralIOIte
      *             if there is nothing left to read
      */
     public char[] nextChars() throws IOException {
-        return nextChars(IOUtils.DEFAULT_BUFFER);
+        return nextChars(UtilIO.DEFAULT_BUFFER);
     }
 
     /**
@@ -301,7 +301,7 @@ public class CharIterator extends AbstractBufferedReader implements GeneralIOIte
      * close this {@code CharIterator}.
      */
     public void close() {
-        IOUtils.closeProperly(super.reader);
+        UtilIO.closeProperly(super.reader);
     }
 
     // Implement //

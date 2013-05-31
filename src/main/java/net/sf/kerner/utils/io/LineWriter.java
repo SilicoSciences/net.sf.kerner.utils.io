@@ -36,7 +36,7 @@ import java.io.IOException;
 public interface LineWriter {
 
     /**
-     * Write a string and append {@link IOUtils#NEW_LINE_STRING}.
+     * Write a string and append {@link UtilIO#NEW_LINE_STRING}.
      * 
      * @param line
      *            string to write
