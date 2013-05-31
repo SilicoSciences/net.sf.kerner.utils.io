@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2009-2011 Alexander Kerner. All rights reserved.
+Copyright (c) 2009-2013 Alexander Kerner. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -44,12 +44,11 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
  * Utility class for commonly used Input/ Output operations.
  * </p>
  * 
- * @author <a href="mailto:alex.kerner.24@googlemail.com">Alexander Kerner</a>
- * @version 2011-08-28
+ * @author <a href="mailto:alexanderkerner24@googlemail.com">Alexander
+ *         Kerner</a>
+ * @version 2013-05-31
  */
 public class IOUtils {
-
-    // Field //
 
     /**
      * The JCL book specifies the default buffer size as 8K characters.
@@ -70,8 +69,6 @@ public class IOUtils {
 	 * 
 	 */
     public final static char NULL_CHAR = '\u0000';
-
-    // Constructor //
 
     public static void closeProperly(final Closeable closable) {
         if (closable != null)
@@ -99,7 +96,8 @@ public class IOUtils {
      * Reads a file an returns an <code>BufferedInputStream</code> from it.
      * 
      * @param file
-     *            <code>File</code> from which the <code>BufferedInputStream</code> is created.
+     *            <code>File</code> from which the
+     *            <code>BufferedInputStream</code> is created.
      * @return the <code>BufferedInputStream</code>.
      * @throws IOException
      */
@@ -111,7 +109,8 @@ public class IOUtils {
      * Reads a file an returns an <code>BufferedOutputStream</code> from it.
      * 
      * @param file
-     *            <code>File</code> from which the <code>BufferedOutputStream</code> is created.
+     *            <code>File</code> from which the
+     *            <code>BufferedOutputStream</code> is created.
      * @return the <code>BufferedOutputStream</code>.
      * @throws IOException
      */
@@ -123,7 +122,8 @@ public class IOUtils {
      * Reads a file an returns an <code>InputStream</code> from it.
      * 
      * @param file
-     *            <code>File</code> from which the <code>InputStream</code> is created.
+     *            <code>File</code> from which the <code>InputStream</code> is
+     *            created.
      * @return the <code>InputStream</code>.
      * @throws IOException
      */
@@ -159,7 +159,8 @@ public class IOUtils {
      * Reads a file an returns an <code>OutputStream</code> from it.
      * 
      * @param file
-     *            <code>File</code> from which the <code>OutputStream</code> is created.
+     *            <code>File</code> from which the <code>OutputStream</code> is
+     *            created.
      * @return the <code>OutputStream</code>.
      * @throws IOException
      */
@@ -177,8 +178,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
+     * Copies the content of an <code>InputStream</code> to an
+     * <code>OutputStream</code>. Will flush the <code>OutputStream</code>, but
+     * won't close <code>InputStream</code> or <code>OutputStream</code>.
      * 
      * @param in
      *            <code>InputStream</code> from which data is read.
@@ -192,8 +194,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to an <code>OutputStream</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>InputStream</code> or <code>OutputStream</code>.
+     * Copies the content of an <code>InputStream</code> to an
+     * <code>OutputStream</code>. Will flush the <code>OutputStream</code>, but
+     * won't close <code>InputStream</code> or <code>OutputStream</code>.
      * 
      * @param in
      *            <code>InputStream</code> from which data is read.
@@ -220,8 +223,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to a <code>Reader</code>. Will flush the
-     * <code>InputStream</code>, but won't close <code>Reader</code> or <code>InputStream</code>.
+     * Copies the content of an <code>InputStream</code> to a
+     * <code>Reader</code>. Will flush the <code>InputStream</code>, but won't
+     * close <code>Reader</code> or <code>InputStream</code>.
      * 
      * @param in
      *            <code>InputStream</code> from which data is read.
@@ -233,8 +237,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
-     * but won't close <code>InputStream</code> or <code>Writer</code>.
+     * Copies the content of an <code>InputStream</code> to a
+     * <code>Writer</code>. Will flush the <code>Writer</code>, but won't close
+     * <code>InputStream</code> or <code>Writer</code>.
      * 
      * @param in
      *            <code>InputStream</code> from which data is read.
@@ -249,8 +254,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>InputStream</code> to a <code>Writer</code>. Will flush the <code>Writer</code>,
-     * but won't close <code>InputStream</code> or <code>Writer</code>.
+     * Copies the content of an <code>InputStream</code> to a
+     * <code>Writer</code>. Will flush the <code>Writer</code>, but won't close
+     * <code>InputStream</code> or <code>Writer</code>.
      * 
      * @param in
      *            <code>InputStream</code> from which data is read.
@@ -271,7 +277,8 @@ public class IOUtils {
      * Write an {@code Object} that implements {@link Serializable} to a file.
      * </p>
      * <p>
-     * Serialization is buffered: Internally a {@link BufferedOutputStream} is used.
+     * Serialization is buffered: Internally a {@link BufferedOutputStream} is
+     * used.
      * </p>
      * 
      * @see Serializable
@@ -290,10 +297,12 @@ public class IOUtils {
 
     /**
      * <p>
-     * Write an {@code Object} that implements {@link Serializable} to an {@link OutputStream}.
+     * Write an {@code Object} that implements {@link Serializable} to an
+     * {@link OutputStream}.
      * </p>
      * <p>
-     * Serialization is buffered: Internally a {@link BufferedOutputStream} is used.
+     * Serialization is buffered: Internally a {@link BufferedOutputStream} is
+     * used.
      * </p>
      * 
      * @see Serializable
@@ -320,8 +329,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>OutputStream</code> to a <code>Reader</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>Reader</code> or <code>OutputStream</code>.
+     * Copies the content of an <code>OutputStream</code> to a
+     * <code>Reader</code>. Will flush the <code>OutputStream</code>, but won't
+     * close <code>Reader</code> or <code>OutputStream</code>.
      * 
      * @param out
      *            <code>OutputStream</code> from which data is read.
@@ -336,8 +346,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of an <code>OutputStream</code> to a <code>Writer</code>. Will flush the
-     * <code>OutputStream</code>, but won't close <code>Writer</code> or <code>OutputStream</code>.
+     * Copies the content of an <code>OutputStream</code> to a
+     * <code>Writer</code>. Will flush the <code>OutputStream</code>, but won't
+     * close <code>Writer</code> or <code>OutputStream</code>.
      * 
      * @param out
      *            <code>OutputStream</code> from which data is read.
@@ -349,8 +360,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of a <code>Reader</code> to a <code>Writer</code>. Will flush the <code>Writer</code>, but
-     * won't close <code>Reader</code> or <code>Writer</code>.
+     * Copies the content of a <code>Reader</code> to a <code>Writer</code>.
+     * Will flush the <code>Writer</code>, but won't close <code>Reader</code>
+     * or <code>Writer</code>.
      * 
      * @param reader
      *            <code>Reader</code> from which data is read.
@@ -364,8 +376,9 @@ public class IOUtils {
     }
 
     /**
-     * Copies the content of a <code>Reader</code> to a <code>Writer</code>. Will flush the <code>Writer</code>, but
-     * won't close <code>Reader</code> or <code>Writer</code>.
+     * Copies the content of a <code>Reader</code> to a <code>Writer</code>.
+     * Will flush the <code>Writer</code>, but won't close <code>Reader</code>
+     * or <code>Writer</code>.
      * 
      * @param reader
      *            <code>Reader</code> from which data is read.
