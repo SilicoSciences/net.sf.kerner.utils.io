@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import net.sf.kerner.utils.io.FileUtils;
+import net.sf.kerner.utils.io.UtilFile;
 import net.sf.kerner.utils.io.UtilIO;
 
 /**
@@ -52,7 +52,7 @@ public abstract class AbstractBufferedWriter implements GenericBufferedWriter {
      */
     public AbstractBufferedWriter(final File file) throws IOException {
         synchronized (AbstractBufferedWriter.class) {
-            FileUtils.fileCheck(file, true);
+            UtilFile.fileCheck(file, true);
             writer = new BufferedWriter(new FileWriter(file));
         }
     }

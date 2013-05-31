@@ -30,7 +30,7 @@ public class FileCopier {
     private final File outFile;
 
     public FileCopier(File in, File out) throws IOException {
-        if (!FileUtils.fileCheck(in, false))
+        if (!UtilFile.fileCheck(in, false))
             throw new FileNotFoundException("cannot read " + in);
         this.inStream = UtilIO.getInputStreamFromFile(in);
         this.outFile = out;
@@ -38,14 +38,14 @@ public class FileCopier {
 
     public FileCopier(String inFilePath, String outFilePath) throws IOException {
         final File in = new File(inFilePath);
-        if (!FileUtils.fileCheck(in, false))
+        if (!UtilFile.fileCheck(in, false))
             throw new FileNotFoundException("cannot read " + in);
         this.inStream = UtilIO.getInputStreamFromFile(in);
         this.outFile = new File(outFilePath);
     }
 
     public FileCopier(File inFile, File outDir, String outFileName) throws IOException {
-        if (!FileUtils.fileCheck(inFile, false))
+        if (!UtilFile.fileCheck(inFile, false))
             throw new FileNotFoundException("cannot read " + inFile);
         this.inStream = UtilIO.getInputStreamFromFile(inFile);
         this.outFile = new File(outDir, outFileName);

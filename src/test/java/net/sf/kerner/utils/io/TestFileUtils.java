@@ -34,7 +34,7 @@ public class TestFileUtils {
 
     @Test
     public final void testDirCheck01() {
-        assertTrue(FileUtils.dirCheck(Util.WORKING_DIR, false));
+        assertTrue(UtilFile.dirCheck(Util.WORKING_DIR, false));
     }
 
     @Ignore
@@ -45,7 +45,7 @@ public class TestFileUtils {
         System.out.println(dir.isDirectory());
         System.out.println(dir.length());
 
-        assertTrue(FileUtils.dirCheck(new File("/mnt/autofs/exported-spectra"), false));
+        assertTrue(UtilFile.dirCheck(new File("/mnt/autofs/exported-spectra"), false));
     }
 
     @Ignore

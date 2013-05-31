@@ -43,7 +43,7 @@ import java.util.List;
  * @version 2012-04-13
  * 
  */
-public class FileUtils {
+public class UtilFile {
 
     public static boolean delete(final File file) throws IOException {
         final boolean dirCheck = dirCheck(file, false);
@@ -156,7 +156,7 @@ public class FileUtils {
         return result;
     }
 
-    private FileUtils() {
+    private UtilFile() {
     }
 
 }
