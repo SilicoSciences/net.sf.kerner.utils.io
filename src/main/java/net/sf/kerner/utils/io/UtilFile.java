@@ -124,10 +124,14 @@ public class UtilFile {
                     return (file.canRead() && file.isFile());
                 else {
                     try {
-                        boolean b = file.getParentFile().mkdirs();
+                        boolean b;
+                        if (file.getParentFile() != null) {
+                            b = file.getParentFile().mkdirs();
+                        }
                         b = file.createNewFile();
                         return b;
                     } catch (final Exception e) {
+                        e.printStackTrace();
                         return false;
                     }
                 }
