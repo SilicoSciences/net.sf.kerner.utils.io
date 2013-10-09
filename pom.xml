@@ -18,7 +18,7 @@
 		<developer>
 			<id>kerner</id>
 			<name>Alexander Kerner</name>
-			<email>alexanderkerner24@googlemail.com</email>
+			<email>alexanderkerner24@gmail.com</email>
 			<roles>
 				<role>Project Manager</role>
 				<role>Architect</role>
@@ -182,7 +182,7 @@
 		<dependency>
 			<groupId>net.sf.kerner-utils</groupId>
 			<artifactId>kerner-utils</artifactId>
-			<version>0.18.2</version>
+			<version>0.18.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
