@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 
-import net.sf.kerner.utils.impl.util.Util;
+import net.sf.kerner.utils.Util;
 
 import org.junit.After;
 import org.junit.AfterClass;

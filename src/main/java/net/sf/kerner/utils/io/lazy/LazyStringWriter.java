@@ -35,8 +35,8 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringWriter;
  * </ul>
  * </p>
  * <p>
- * <b>Attention:</b> writing is not buffered! If you want to write large files, consider to use
- * {@link BufferedStringWriter} instead.
+ * <b>Attention:</b> writing is not buffered! If you want to write large files,
+ * consider to use {@link BufferedStringWriter} instead.
  * </p>
  * <p>
  * <b>Example:</b>
@@ -51,7 +51,8 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringWriter;
  * }
  * </pre>
  * <p>
- * <b>Note:</b> It is not necessary to close a {@code LazyStringWriter}. This will happen automatically.
+ * <b>Note:</b> It is not necessary to close a {@code LazyStringWriter}. This
+ * will happen automatically.
  * </p>
  * 
  * @author Alexander Kerner
@@ -65,7 +66,8 @@ public class LazyStringWriter implements GenericWriter {
     private final String string;
 
     /**
-     * Creates a new {@code LazyStringWriter}, which will write {@code toString}.
+     * Creates a new {@code LazyStringWriter}, which will write {@code toString}
+     * .
      * 
      * @param toString
      *            Object which will be written
@@ -73,7 +75,7 @@ public class LazyStringWriter implements GenericWriter {
     public LazyStringWriter(final Object toString) {
         if (toString == null)
             throw new NullPointerException();
-        this.string = toString.toString();
+        string = toString.toString();
     }
 
     // Implement //

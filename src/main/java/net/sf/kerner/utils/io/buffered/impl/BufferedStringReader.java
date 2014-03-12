@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import net.sf.kerner.utils.impl.util.UtilArray;
+import net.sf.kerner.utils.UtilArray;
 import net.sf.kerner.utils.io.UtilIO;
 import net.sf.kerner.utils.io.buffered.CharReader;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;

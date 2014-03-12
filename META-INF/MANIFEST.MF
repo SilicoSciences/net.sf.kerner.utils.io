@@ -1,22 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-Name: kerner-utils-io
+Bundle-Name: Kerner Utilities - I/O
 Bundle-SymbolicName: net.sf.kerner-utils-io
-Bundle-Version: 0.5.1.qualifier
-Export-Package: net.sf.kerner.utils.io;version="0.5.1.qualifier",
- net.sf.kerner.utils.io.buffered;version="0.5.1.qualifier",
- net.sf.kerner.utils.io.buffered.impl;version="0.5.1.qualifier",
- net.sf.kerner.utils.io.lazy;version="0.5.1.qualifier"
+Bundle-Version: 0.5.2
+Export-Package: net.sf.kerner.utils.io;version="0.5.2",
+ net.sf.kerner.utils.io.buffered;version="0.5.2",
+ net.sf.kerner.utils.io.buffered.impl;version="0.5.2",
+ net.sf.kerner.utils.io.lazy;version="0.5.2"
 Import-Package: net.sf.kerner.utils;version="0.18.0",
- net.sf.kerner.utils.async;version="0.18.0",
- net.sf.kerner.utils.concurrent;version="0.18.0",
- net.sf.kerner.utils.counter;version="0.18.0",
- net.sf.kerner.utils.exception;version="0.18.0",
- net.sf.kerner.utils.impl;version="0.18.0",
- net.sf.kerner.utils.impl.util;version="0.18.0",
  net.sf.kerner.utils.math;version="0.18.0",
- net.sf.kerner.utils.math.point;version="0.18.0",
- net.sf.kerner.utils.monitor.memory;version="0.18.0",
- net.sf.kerner.utils.time;version="0.18.0",
  org.junit;resolution:=optional

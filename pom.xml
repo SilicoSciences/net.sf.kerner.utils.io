@@ -7,8 +7,8 @@
 	</parent>
 	<groupId>net.sf.kerner-utils-io</groupId>
 	<artifactId>kerner-utils-io</artifactId>
-	<version>0.5.1-SNAPSHOT</version>
-	<name>Kerner Utilities I/O</name>
+	<version>0.5.2-SNAPSHOT</version>
+	<name>Kerner Utilities - I/O</name>
 	<description>Commonly used utility classes (I/O related).</description>
 	<url>http://kerner-utils-io.sourceforge.net/</url>
 	<properties>
@@ -182,7 +182,7 @@
 		<dependency>
 			<groupId>net.sf.kerner-utils</groupId>
 			<artifactId>kerner-utils</artifactId>
-			<version>0.18.4-SNAPSHOT</version>
+			<version>0.19.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
