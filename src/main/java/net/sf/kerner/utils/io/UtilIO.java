@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright (c) 2010-2014 Alexander Kerner. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,10 +43,10 @@ import net.sf.kerner.utils.io.buffered.impl.BufferedStringReader;
  * <p>
  * Utility class for commonly used Input/ Output operations.
  * </p>
- * 
+ *
  * @author <a href="mailto:alexanderkerner24@googlemail.com">Alexander
  *         Kerner</a>
- * @version 2013-05-31
+ * @version 2014-04-17
  */
 public class UtilIO {
 
@@ -56,17 +56,17 @@ public class UtilIO {
     public static final int DEFAULT_BUFFER = 8192;
 
     /**
-	 * 
+	 *
 	 */
     public final static char NEW_LINE_CHAR = UtilString.NEW_LINE_STRING.charAt(0);
 
     /**
-	 * 
+	 *
 	 */
     public final static String NEW_LINE_STRING = UtilString.NEW_LINE_STRING;
 
     /**
-	 * 
+	 *
 	 */
     public final static char NULL_CHAR = '\u0000';
 
@@ -80,7 +80,8 @@ public class UtilIO {
 
     }
 
-    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException, ClassNotFoundException {
+    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException,
+            ClassNotFoundException {
         if (c == null || s == null)
             throw new NullPointerException();
         final ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -94,33 +95,35 @@ public class UtilIO {
 
     /**
      * Reads a file an returns an <code>BufferedInputStream</code> from it.
-     * 
+     *
      * @param file
      *            <code>File</code> from which the
      *            <code>BufferedInputStream</code> is created.
      * @return the <code>BufferedInputStream</code>.
      * @throws IOException
      */
-    public static BufferedInputStream getBufferedInputStreamFromFile(final File file) throws IOException {
+    public static BufferedInputStream getBufferedInputStreamFromFile(final File file)
+            throws IOException {
         return new BufferedInputStream(new FileInputStream(file));
     }
 
     /**
      * Reads a file an returns an <code>BufferedOutputStream</code> from it.
-     * 
+     *
      * @param file
      *            <code>File</code> from which the
      *            <code>BufferedOutputStream</code> is created.
      * @return the <code>BufferedOutputStream</code>.
      * @throws IOException
      */
-    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file) throws FileNotFoundException {
+    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file)
+            throws FileNotFoundException {
         return new BufferedOutputStream(new FileOutputStream(file));
     }
 
     /**
      * Reads a file an returns an <code>InputStream</code> from it.
-     * 
+     *
      * @param file
      *            <code>File</code> from which the <code>InputStream</code> is
      *            created.
@@ -129,6 +132,29 @@ public class UtilIO {
      */
     public static InputStream getInputStreamFromFile(final File file) throws IOException {
         return new FileInputStream(file);
+    }
+
+    public static long getNumberOfTotalLines(final File file) throws IOException {
+        final InputStream is = new BufferedInputStream(new FileInputStream(file));
+        try {
+            final byte[] c = new byte[1024];
+            long count = 0;
+            int readChars = 0;
+            boolean empty = true;
+            while ((readChars = is.read(c)) != -1) {
+                empty = false;
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == UtilIO.NEW_LINE_CHAR) {
+                        ++count;
+                    }
+                }
+            }
+            return (count == 0 && !empty) ? 1 : count;
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
     }
 
     public static long getOccource(final char c, final File file) throws IOException {
@@ -157,7 +183,7 @@ public class UtilIO {
 
     /**
      * Reads a file an returns an <code>OutputStream</code> from it.
-     * 
+     *
      * @param file
      *            <code>File</code> from which the <code>OutputStream</code> is
      *            created.
@@ -168,7 +194,8 @@ public class UtilIO {
         return new FileOutputStream(file);
     }
 
-    public static long InputStreamToFile(final InputStream stream, final File file) throws IOException {
+    public static long InputStreamToFile(final InputStream stream, final File file)
+            throws IOException {
         final FileWriter w = new FileWriter(file);
         final InputStreamReader r = new InputStreamReader(stream);
         final long result = readerToWriter(new InputStreamReader(stream), w);
@@ -181,7 +208,7 @@ public class UtilIO {
      * Copies the content of an <code>InputStream</code> to an
      * <code>OutputStream</code>. Will flush the <code>OutputStream</code>, but
      * won't close <code>InputStream</code> or <code>OutputStream</code>.
-     * 
+     *
      * @param in
      *            <code>InputStream</code> from which data is read.
      * @param out
@@ -189,7 +216,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out) throws IOException {
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out)
+            throws IOException {
         return inputStreamToOutputStream(in, out, DEFAULT_BUFFER);
     }
 
@@ -197,7 +225,7 @@ public class UtilIO {
      * Copies the content of an <code>InputStream</code> to an
      * <code>OutputStream</code>. Will flush the <code>OutputStream</code>, but
      * won't close <code>InputStream</code> or <code>OutputStream</code>.
-     * 
+     *
      * @param in
      *            <code>InputStream</code> from which data is read.
      * @param out
@@ -207,8 +235,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out, int buffer)
-            throws IOException {
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out,
+            int buffer) throws IOException {
         if (buffer < 1)
             buffer = DEFAULT_BUFFER;
         final byte[] byteBuffer = new byte[buffer];
@@ -226,7 +254,7 @@ public class UtilIO {
      * Copies the content of an <code>InputStream</code> to a
      * <code>Reader</code>. Will flush the <code>InputStream</code>, but won't
      * close <code>Reader</code> or <code>InputStream</code>.
-     * 
+     *
      * @param in
      *            <code>InputStream</code> from which data is read.
      * @return a new <code>Reader</code>
@@ -240,7 +268,7 @@ public class UtilIO {
      * Copies the content of an <code>InputStream</code> to a
      * <code>Writer</code>. Will flush the <code>Writer</code>, but won't close
      * <code>InputStream</code> or <code>Writer</code>.
-     * 
+     *
      * @param in
      *            <code>InputStream</code> from which data is read.
      * @param out
@@ -248,7 +276,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToWriter(final InputStream in, final Writer out) throws IOException {
+    public static long inputStreamToWriter(final InputStream in, final Writer out)
+            throws IOException {
         final InputStreamReader inr = new InputStreamReader(in);
         return readerToWriter(inr, out);
     }
@@ -257,7 +286,7 @@ public class UtilIO {
      * Copies the content of an <code>InputStream</code> to a
      * <code>Writer</code>. Will flush the <code>Writer</code>, but won't close
      * <code>InputStream</code> or <code>Writer</code>.
-     * 
+     *
      * @param in
      *            <code>InputStream</code> from which data is read.
      * @param out
@@ -267,7 +296,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer) throws IOException {
+    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer)
+            throws IOException {
         final InputStreamReader inr = new InputStreamReader(in);
         return readerToWriter(inr, out, buffer);
     }
@@ -280,7 +310,7 @@ public class UtilIO {
      * Serialization is buffered: Internally a {@link BufferedOutputStream} is
      * used.
      * </p>
-     * 
+     *
      * @see Serializable
      * @param s
      *            {@code Object} that will be serialized
@@ -304,7 +334,7 @@ public class UtilIO {
      * Serialization is buffered: Internally a {@link BufferedOutputStream} is
      * used.
      * </p>
-     * 
+     *
      * @see Serializable
      * @param s
      *            {@code Object} that will be serialized
@@ -313,7 +343,8 @@ public class UtilIO {
      * @throws IOException
      *             if anything goes wrong
      */
-    public static void objectToStream(final Serializable s, final OutputStream stream) throws IOException {
+    public static void objectToStream(final Serializable s, final OutputStream stream)
+            throws IOException {
         if (s == null || stream == null)
             throw new NullPointerException();
         ObjectOutputStream outStream = null;
@@ -332,7 +363,7 @@ public class UtilIO {
      * Copies the content of an <code>OutputStream</code> to a
      * <code>Reader</code>. Will flush the <code>OutputStream</code>, but won't
      * close <code>Reader</code> or <code>OutputStream</code>.
-     * 
+     *
      * @param out
      *            <code>OutputStream</code> from which data is read.
      * @param reader
@@ -340,7 +371,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long outputStreamToReader(final OutputStream out, final Reader reader) throws IOException {
+    public static long outputStreamToReader(final OutputStream out, final Reader reader)
+            throws IOException {
         final OutputStreamWriter outw = new OutputStreamWriter(out);
         return readerToWriter(reader, outw);
     }
@@ -349,7 +381,7 @@ public class UtilIO {
      * Copies the content of an <code>OutputStream</code> to a
      * <code>Writer</code>. Will flush the <code>OutputStream</code>, but won't
      * close <code>Writer</code> or <code>OutputStream</code>.
-     * 
+     *
      * @param out
      *            <code>OutputStream</code> from which data is read.
      * @return a new <code>Writer</code>
@@ -363,7 +395,7 @@ public class UtilIO {
      * Copies the content of a <code>Reader</code> to a <code>Writer</code>.
      * Will flush the <code>Writer</code>, but won't close <code>Reader</code>
      * or <code>Writer</code>.
-     * 
+     *
      * @param reader
      *            <code>Reader</code> from which data is read.
      * @param writer
@@ -379,7 +411,7 @@ public class UtilIO {
      * Copies the content of a <code>Reader</code> to a <code>Writer</code>.
      * Will flush the <code>Writer</code>, but won't close <code>Reader</code>
      * or <code>Writer</code>.
-     * 
+     *
      * @param reader
      *            <code>Reader</code> from which data is read.
      * @param writer
@@ -389,7 +421,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long readerToWriter(final Reader reader, final Writer writer, int buffer) throws IOException {
+    public static long readerToWriter(final Reader reader, final Writer writer, int buffer)
+            throws IOException {
         if (buffer < 1)
             buffer = DEFAULT_BUFFER;
         final char[] charBuffer = new char[buffer];
