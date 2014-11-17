@@ -16,25 +16,18 @@
 package net.sf.kerner.utils.io;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
+import java.io.OutputStream;
 
-public abstract class AbstractGenericCollectionReader<T> implements GenericCollectionReader<T> {
+public abstract class GenericWriterAbstract implements GenericWriter {
 
-    /**
-	 * 
-	 */
-    public Collection<T> readAll(File file) throws IOException {
-        return readAll(new FileInputStream(file));
+    public void write(final File file) throws IOException {
+        write(new FileOutputStream(file));
     }
 
-    /**
-	 * 
-	 */
-    public Collection<T> readAll(InputStream stream) throws IOException {
-        return readAll(UtilIO.inputStreamToReader(stream));
+    public void write(final OutputStream stream) throws IOException {
+        write(UtilIO.outputStreamToWriter(stream));
     }
 
 }
