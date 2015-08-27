@@ -56,20 +56,25 @@ public class UtilIO {
     public static final int DEFAULT_BUFFER = 8192;
 
     /**
-	 *
-	 */
+     *
+     */
     public final static char NEW_LINE_CHAR = UtilString.NEW_LINE_STRING.charAt(0);
 
     /**
-	 *
-	 */
+     *
+     */
     public final static String NEW_LINE_STRING = UtilString.NEW_LINE_STRING;
 
     /**
-	 *
-	 */
+     *
+     */
     public final static char NULL_CHAR = '\u0000';
 
+    /**
+     *
+     * @deprecated Use {@link CloserProperly} instead.
+     */
+    @Deprecated
     public static void closeProperly(final Closeable closable) {
         if (closable != null)
             try {
@@ -80,8 +85,7 @@ public class UtilIO {
 
     }
 
-    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException,
-            ClassNotFoundException {
+    public static <V> V deepCopy(final Class<V> c, final Serializable s) throws IOException, ClassNotFoundException {
         if (c == null || s == null)
             throw new NullPointerException();
         final ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -102,8 +106,7 @@ public class UtilIO {
      * @return the <code>BufferedInputStream</code>.
      * @throws IOException
      */
-    public static BufferedInputStream getBufferedInputStreamFromFile(final File file)
-            throws IOException {
+    public static BufferedInputStream getBufferedInputStreamFromFile(final File file) throws IOException {
         return new BufferedInputStream(new FileInputStream(file));
     }
 
@@ -116,8 +119,7 @@ public class UtilIO {
      * @return the <code>BufferedOutputStream</code>.
      * @throws IOException
      */
-    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file)
-            throws FileNotFoundException {
+    public static BufferedOutputStream getBufferedOutputStreamForFile(final File file) throws FileNotFoundException {
         return new BufferedOutputStream(new FileOutputStream(file));
     }
 
@@ -194,8 +196,7 @@ public class UtilIO {
         return new FileOutputStream(file);
     }
 
-    public static long InputStreamToFile(final InputStream stream, final File file)
-            throws IOException {
+    public static long InputStreamToFile(final InputStream stream, final File file) throws IOException {
         final FileWriter w = new FileWriter(file);
         final InputStreamReader r = new InputStreamReader(stream);
         final long result = readerToWriter(new InputStreamReader(stream), w);
@@ -216,8 +217,7 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out)
-            throws IOException {
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out) throws IOException {
         return inputStreamToOutputStream(in, out, DEFAULT_BUFFER);
     }
 
@@ -235,8 +235,8 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out,
-            int buffer) throws IOException {
+    public static long inputStreamToOutputStream(final InputStream in, final OutputStream out, int buffer)
+            throws IOException {
         if (buffer < 1)
             buffer = DEFAULT_BUFFER;
         final byte[] byteBuffer = new byte[buffer];
@@ -276,8 +276,7 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToWriter(final InputStream in, final Writer out)
-            throws IOException {
+    public static long inputStreamToWriter(final InputStream in, final Writer out) throws IOException {
         final InputStreamReader inr = new InputStreamReader(in);
         return readerToWriter(inr, out);
     }
@@ -296,8 +295,7 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer)
-            throws IOException {
+    public static long inputStreamToWriter(final InputStream in, final Writer out, final int buffer) throws IOException {
         final InputStreamReader inr = new InputStreamReader(in);
         return readerToWriter(inr, out, buffer);
     }
@@ -343,8 +341,7 @@ public class UtilIO {
      * @throws IOException
      *             if anything goes wrong
      */
-    public static void objectToStream(final Serializable s, final OutputStream stream)
-            throws IOException {
+    public static void objectToStream(final Serializable s, final OutputStream stream) throws IOException {
         if (s == null || stream == null)
             throw new NullPointerException();
         ObjectOutputStream outStream = null;
@@ -371,8 +368,7 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long outputStreamToReader(final OutputStream out, final Reader reader)
-            throws IOException {
+    public static long outputStreamToReader(final OutputStream out, final Reader reader) throws IOException {
         final OutputStreamWriter outw = new OutputStreamWriter(out);
         return readerToWriter(reader, outw);
     }
@@ -421,8 +417,7 @@ public class UtilIO {
      * @return number of bytes read/written.
      * @throws IOException
      */
-    public static long readerToWriter(final Reader reader, final Writer writer, int buffer)
-            throws IOException {
+    public static long readerToWriter(final Reader reader, final Writer writer, int buffer) throws IOException {
         if (buffer < 1)
             buffer = DEFAULT_BUFFER;
         final char[] charBuffer = new char[buffer];
