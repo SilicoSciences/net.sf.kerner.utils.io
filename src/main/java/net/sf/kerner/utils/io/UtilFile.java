@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright (c) 2010-2014 Alexander Kerner. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,27 +21,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  * TODO description
- * 
+ *
  * <p>
  * <b>Example:</b><br>
- * 
+ *
  * </p>
  * <p>
- * 
+ *
  * <pre>
  * TODO example
  * </pre>
- * 
+ *
  * </p>
  * <p>
  * last reviewed: 0000-00-00
  * </p>
- * 
+ *
  * @author <a href="mailto:alexanderkerner24@gmail.com">Alexander Kerner</a>
  * @version 2012-04-13
- * 
+ *
  */
 public class UtilFile {
 
@@ -73,19 +73,19 @@ public class UtilFile {
         return true;
     }
 
-/**
-        	 * Extended accessibility test, if a directory is available for reading. <br>
-        	 * it consists of following tests:
-        	 * <p>
-        	 * {@code dir.exists() && dir.canRead() && dir.isDirectory()
-        	 * <p>
-        	 * 
-        	 * @param dir
-        	 *            directory, that is checked.
-        	 * @param createIfAbsend
-        	 *            if {@code !dir.exists()}, it will be created.
-        	 * @return true, if dir is accessible, false otherwise.
-        	 */
+    /**
+     * Extended accessibility test, if a directory is available for reading. <br>
+     * it consists of following tests:
+     * <p>
+     * {@code dir.exists() && dir.canRead() && dir.isDirectory()
+     * <p>
+     *
+     * @param dir
+     *            directory, that is checked.
+     * @param createIfAbsend
+     *            if {@code !dir.exists()}, it will be created.
+     * @return true, if dir is accessible, false otherwise.
+     */
     public static boolean dirCheck(final File dir, final boolean createIfAbsend) {
         if (createIfAbsend) {
             if (dir.exists())
@@ -110,7 +110,7 @@ public class UtilFile {
      * <li>
      * {@code file.isFile()}</li>
      * </p>
-     * 
+     *
      * @param file
      *            file, that is checked.
      * @param createIfAbsend
@@ -145,9 +145,9 @@ public class UtilFile {
         final List<File> result = new ArrayList<File>();
         new AbstractDirectoryWalker() {
             @Override
-            public void handleDir(final File dir) throws IOException {
+            public void handleDir(final File dir2) throws IOException {
                 if (includeSubDirs) {
-                    result.addAll(getAllFilesInDir(dir, includeSubDirs));
+                    result.addAll(getAllFilesInDir(dir2, includeSubDirs));
                 }
             }
 
