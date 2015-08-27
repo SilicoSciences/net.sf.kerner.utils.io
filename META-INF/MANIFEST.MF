@@ -10,4 +10,5 @@ Export-Package: net.sf.kerner.utils.io;version="0.5.3",
  net.sf.kerner.utils.io.lazy;version="0.5.3"
 Import-Package: net.sf.kerner.utils;version="0.18.0",
  net.sf.kerner.utils.math;version="0.18.0",
- org.junit;resolution:=optional
+ org.junit;resolution:=optional,
+ org.slf4j;version="1.7.2"
