@@ -3,12 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Name: Kerner Utilities - I/O
 Bundle-SymbolicName: net.sf.kerner-utils-io
-Bundle-Version: 0.5.3
-Export-Package: net.sf.kerner.utils.io;version="0.5.3",
- net.sf.kerner.utils.io.buffered;version="0.5.3",
- net.sf.kerner.utils.io.buffered.impl;version="0.5.3",
- net.sf.kerner.utils.io.lazy;version="0.5.3"
-Import-Package: net.sf.kerner.utils;version="0.18.0",
- net.sf.kerner.utils.math;version="0.18.0",
+Bundle-Version: 0.5.4.qualifier
+Export-Package: net.sf.kerner.utils.io;version="0.5.4.qualifier",
+ net.sf.kerner.utils.io.buffered;version="0.5.4.qualifier",
+ net.sf.kerner.utils.io.buffered.impl;version="0.5.4.qualifier",
+ net.sf.kerner.utils.io.lazy;version="0.5.4.qualifier"
+Import-Package: net.sf.kerner.utils,
+ net.sf.kerner.utils.math,
  org.junit;resolution:=optional,
  org.slf4j;version="1.7.2"
